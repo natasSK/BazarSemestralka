@@ -1,0 +1,280 @@
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+
+
+@media screen and (max-width: 768px) {
+    .textInfo {
+        height: 400px;
+    }
+}
+
+
+.posuvatelny-blok {
+    overflow: scroll; /* vytvorenie posúvateľného bloku */
+    padding: 10px; /* vnútorný odsadenie obsahu */
+    border: 1px solid;
+
+}
+
+.carousel-item img {
+    max-width: 100%; /* Nastavte maximálnu šírku obrázkov na 100% */
+    max-height: 200px; /* Nastavte maximálnu výšku obrázkov na 150px */
+    margin: 0 auto; /* Zarovnanie obrázkov na stred */
+}
+
+.hlObrDiv {
+    width: 90%; /* Nastavte šírku carousela na 80% */
+    height: 170px; /* Nastavte maximálnu výšku carousela na 200px */
+    margin: 0 auto; /* Zarovnanie na stred */
+}
+.hlObrImg {
+    max-width: 100%; /* Nastavte maximálnu šírku obrázkov na 100% */
+    height: 145px; /* Nastavte maximálnu výšku obrázkov na 150px */
+    margin: 0 auto; /* Zarovnanie obrázkov na stred */
+}
+
+#pozadie-container {
+    background-image: url("/resources/img/pozadie.png");
+    background-size: cover; /* Aby sa obrázok pokryl celým kontajnerom */
+    background-position: center; /* Zarovnanie obrázka do stredu */
+}
+
+.vyhladavanie {
+
+    outline: none;
+    border: none;
+    padding: 15px;
+    padding-right: 60px;
+    border-radius: 15px;
+    background-color: #ecf0f1;
+    align-items: center;
+    transition: background-color 0.5s, border 0.5s;
+    font-weight: bold;
+    font-size: 25px;
+    color: #3498db;
+}
+.search button {
+    cursor: pointer;
+    padding: 0;
+    font-size: 45px;
+    position: absolute;
+    top: 17px;
+    right: 25px;
+    background: transparent;
+    border: 0;
+    transition: color 0.5s;
+    color: #3498db;
+}
+.search button:hover {
+    color: #e67e22;
+}
+
+.nav-pills .nav-link.active {
+    background-color: #3498db;
+    font-weight: bold;
+    transition: background-color 0.5s;
+}
+.nav-pills .nav-link.active:hover {
+    background-color: #e67e22;
+}
+.nav-link:hover {
+    color: #e67e22;
+}
+.nav-link {
+    font-weight: bold;
+    transition: color 0.5s;
+}
+.vyhladavanie::placeholder {
+    font-size: 25px;
+    color: #bdc3c7;
+    font-weight: bold;
+}
+
+.najnovsieText ion-icon {
+    color: red;
+}
+
+
+
+
+.card {
+    box-shadow: 0 1px 3px rgba(230, 126, 34, 0.89), 0 1px 2px #e67e22;
+    transition: all 0.2s ease-in-out;
+
+    background-color:#FFF;
+}
+
+.card:hover {
+    box-shadow: 0 5px 5px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.najnovsieText a {
+    text-decoration: none;
+}
+
+.kategorie a {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: large;
+}
+
+.vyhladavanieVyhl .vyhladanie {
+    outline: none;
+    border: none;
+    padding: 15px;
+    padding-right: 60px;
+    border: 1px solid #f67d13;
+    border-radius: 15px;
+    background-color: #ecf0f1;
+    align-items: center;
+    transition: background-color 0.5s, border 0.5s;
+    font-weight: bold;
+    font-size: 15px;
+    color: #3498db;
+    position: relative;
+}
+
+#K_oblecenie {
+    background-image: url("/resources/img/oblecenie.jpg");
+    background-size: cover; /* roztiahne obrázok na celý element */
+    background-position: center; /* umiestni obrázok na stred elementu */
+}
+
+#K_auta {
+    background-image: url("/resources/img/auta.webp");
+    background-size: cover; /* roztiahne obrázok na celý element */
+    background-position: center; /* umiestni obrázok na stred elementu */
+}
+
+#K_dom {
+    background-image: url("/resources/img/dom.jpg");
+    background-size: cover; /* roztiahne obrázok na celý element */
+    background-position: center; /* umiestni obrázok na stred elementu */
+}
+
+#K_deti {
+    background-image: url("/resources/img/deti.webp");
+    background-size: cover; /* roztiahne obrázok na celý element */
+    background-position: center; /* umiestni obrázok na stred elementu */
+}
+
+#K_motorka {
+    background-image: url("/resources/img/motorka.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+#K_pohovka {
+    background-image: url("/resources/img/pohovka.webp");
+    background-size: cover;
+    background-position: center;
+}
+
+#K_pes {
+    background-image: url("/resources/img/pes.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+#K_naradie {
+    background-image: url("/resources/img/naradie.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+#K_lopta {
+    background-image: url("/resources/img/lopta.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+#K_hudba {
+    background-image: url("/resources/img/hudba.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+#K_pc {
+    background-image: url("/resources/img/notebook.webp");
+    background-size: cover;
+    background-position: center;
+}
+
+#K_knihy {
+    background-image: url("/resources/img/knihy.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+#K_mobily {
+    background-image: url("/resources/img/The-Best-Phones-to-buy-in-2023---our-top-10-list.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+#K_fotak {
+    background-image: url("/resources/img/fotak.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+#K_sluzby {
+    background-image: url("/resources/img/sluzby.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+#K_ostatne {
+    background-image: url("/resources/img/ostatne.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.tile {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    margin-bottom: 15px;
+    padding: 15px;
+    text-align: center;
+    border-radius: 8px;
+    transition: all 0.2s ease-in-out;
+}
+
+.tile img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.tile:hover {
+    background-color: rgba(246, 125, 19, 0.18);
+    box-shadow: 0 5px 5px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    transition: all 0.2s ease-in-out;
+}
+
+
+
+
+#user-profile {
+    padding: 20px;
+    margin-bottom: 20px;
+}
+.ad-tile {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+
+
+
+
+
+
