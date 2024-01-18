@@ -20,18 +20,21 @@
                             <div class="col-md-6 col-lg-4">
                                 <a href="{{ route('advert.show', ['advert' => $ad->id]) }}" style="text-decoration: none; color: black">
                                 <div class="tile">
-                                    <img src="https://www.pacificfoodmachinery.com.au/media/catalog/product/placeholder/default/no-product-image-400x400.png" alt="Obrázok" style="width: 100px; height: 100px">
-                                    <div class="text-wrap">
-                                        <h5>{{ $ad->title }}</h5>
+                                    <div class="tileUp" style="background-image: url('{{ asset('https://www.pacificfoodmachinery.com.au/media/catalog/product/placeholder/default/no-product-image-400x400.png') }}');">
                                     </div>
-                                    <div class="text-start text-wrap" style="font-size: smaller">
-                                        <p class="mb-3">{{ $ad->short_desc }}</p>
-                                    </div>
-                                    <div class="text-start" style="color:dodgerblue">
-                                        <p class="mb-0">{{ $ad->place }}</p>
-                                    </div>
-                                    <div class="text-start" style="color:mediumseagreen">
-                                        <p class="mb-0">{{ $ad->price }}€</p>
+                                    <div class="tileDown">
+                                        <div class="text-wrap">
+                                            <h5>{{ $ad->title }}</h5>
+                                        </div>
+                                        <div class="text-start text-wrap" style="font-size: smaller">
+                                            <p class="mb-3">{{ $ad->short_desc }}</p>
+                                        </div>
+                                        <div class="text-start" style="color:dodgerblue">
+                                            <p class="mb-0">{{ $ad->place }}</p>
+                                        </div>
+                                        <div class="text-start" style="color:mediumseagreen">
+                                            <p class="mb-0">{{ $ad->price }}€</p>
+                                        </div>
                                     </div>
                                 </div>
                                 </a>
