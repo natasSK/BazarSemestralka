@@ -5,8 +5,10 @@
     <div class="container-fluid px-5" id="pozadie-container" style="height: 300px">
         <div class="container px-5 hlObrDiv" style="height: 80%; position: relative">
             <div class="search" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 10px; border-radius: 5px;">
-                <input type="text" placeholder="Vyhľadávanie" class="vyhladavanie">
-                <button type="submit"><ion-icon name="search-outline"></ion-icon></button>
+                <form method="GET" action="{{ route('advert.search', ['string' => '']) }}">
+                    <input type="text" name="string" placeholder="Vyhľadávanie" class="vyhladavanie">
+                    <button type="submit"><ion-icon name="search-outline"></ion-icon></button>
+                </form>
             </div>
         </div>
     </div>

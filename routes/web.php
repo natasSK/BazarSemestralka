@@ -46,4 +46,5 @@ Route::post('/a', [App\Http\Controllers\MakeAdvertController::class, 'store']);
 Route::get('/adverts/{advert}/edit', [App\Http\Controllers\AdvertController::class, 'edit'])->name('advert.edit');
 Route::patch('/adverts/{advert}', [App\Http\Controllers\AdvertController::class, 'update'])->name('advert.update');
 Route::delete('/adverts/{advert}/delete', [App\Http\Controllers\AdvertController::class, 'delete'])->name('advert.delete');
-Route::get('/search', [App\Http\Controllers\AdvertController::class, 'search'])->name('advert.search');
+Route::get('/search/{string?}', [App\Http\Controllers\AdvertController::class, 'search'])->name('advert.search');
+

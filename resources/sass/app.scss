@@ -164,9 +164,9 @@
 .search_icon{
     background: transparent;
     color: #3498db;
-    font-size: 40px;
+    font-size: 50px;
     height: 40px;
-    width: 40px;
+    width: 50px;
     float: right;
     display: flex;
     justify-content: center;
@@ -174,6 +174,7 @@
     border-radius: 50%;
     text-decoration:none;
     transition: color 0.5s;
+    border: 0;
 }
 
 .search_icon:hover {

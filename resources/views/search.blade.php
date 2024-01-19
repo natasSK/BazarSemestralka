@@ -54,10 +54,12 @@
                 <div class="d-flex">
                     <div class="container h-100">
                         <div class="d-flex justify-content-center h-100">
-                            <div class="searchbar">
-                                <input class="search_input" type="text" name="" placeholder="Vyhľadávanie...">
-                                <a href="#" class="search_icon"><ion-icon name="search-outline"></ion-icon></a>
-                            </div>
+                            <form method="GET" action="{{ route('advert.search', ['string' => '']) }}">
+                                <div class="searchbar">
+                                    <input class="search_input" type="text" name="string" placeholder="Vyhľadávanie...">
+                                    <button type="submit" class="search_icon"><ion-icon name="search-outline"></ion-icon></button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -65,117 +67,30 @@
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-3">
                         <div class="container najnovsie">
                             <div class="row">
+                                @foreach ($adverts as $ad)
                                     <div class="col-md-4 col-lg-3 col-sm-6 col-6">
-                                        <a href="#" style="text-decoration: none; color: black">
+                                        <a href="/adverts/{{ $ad->id }}" style="text-decoration: none; color: black">
                                             <div class="tile">
                                                 <div class="tileUp" style="background-image: url('{{ asset('https://www.pacificfoodmachinery.com.au/media/catalog/product/placeholder/default/no-product-image-400x400.png') }}');">
                                                 </div>
                                                 <div class="tileDown">
                                                     <div class="text-wrap">
-                                                        <h5>Title</h5>
+                                                        <h5>{{ $ad->title }}</h5>
                                                     </div>
                                                     <div class="text-start text-wrap" style="font-size: smaller">
-                                                        <p class="mb-3">description</p>
+                                                        <p class="mb-3">{{ $ad->short_desc }}</p>
                                                     </div>
                                                     <div class="text-start" style="color:dodgerblue">
-                                                        <p class="mb-0">place</p>
+                                                        <p class="mb-0">{{ $ad->place }}</p>
                                                     </div>
                                                     <div class="text-start" style="color:mediumseagreen">
-                                                        <p class="mb-0">money€</p>
+                                                        <p class="mb-0">{{ $ad->price }}€</p>
                                                     </div>
                                                 </div>
                                             </div>
                                         </a>
                                     </div>
-                                <div class="col-md-4 col-lg-3 col-sm-6 col-6">
-                                    <a href="#" style="text-decoration: none; color: black">
-                                        <div class="tile">
-                                            <div class="tileUp" style="background-image: url('{{ asset('https://www.pacificfoodmachinery.com.au/media/catalog/product/placeholder/default/no-product-image-400x400.png') }}');">
-                                            </div>
-                                            <div class="tileDown">
-                                                <div class="text-wrap">
-                                                    <h5>Title</h5>
-                                                </div>
-                                                <div class="text-start text-wrap" style="font-size: smaller">
-                                                    <p class="mb-3">description</p>
-                                                </div>
-                                                <div class="text-start" style="color:dodgerblue">
-                                                    <p class="mb-0">place</p>
-                                                </div>
-                                                <div class="text-start" style="color:mediumseagreen">
-                                                    <p class="mb-0">money€</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-md-4 col-lg-3 col-sm-6 col-6">
-                                    <a href="#" style="text-decoration: none; color: black">
-                                        <div class="tile">
-                                            <div class="tileUp" style="background-image: url('{{ asset('https://www.pacificfoodmachinery.com.au/media/catalog/product/placeholder/default/no-product-image-400x400.png') }}');">
-                                            </div>
-                                            <div class="tileDown">
-                                                <div class="text-wrap">
-                                                    <h5>Title</h5>
-                                                </div>
-                                                <div class="text-start text-wrap" style="font-size: smaller">
-                                                    <p class="mb-3">description</p>
-                                                </div>
-                                                <div class="text-start" style="color:dodgerblue">
-                                                    <p class="mb-0">place</p>
-                                                </div>
-                                                <div class="text-start" style="color:mediumseagreen">
-                                                    <p class="mb-0">money€</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-md-4 col-lg-3 col-sm-6 col-6">
-                                    <a href="#" style="text-decoration: none; color: black">
-                                        <div class="tile">
-                                            <div class="tileUp" style="background-image: url('{{ asset('https://www.pacificfoodmachinery.com.au/media/catalog/product/placeholder/default/no-product-image-400x400.png') }}');">
-                                            </div>
-                                            <div class="tileDown">
-                                                <div class="text-wrap">
-                                                    <h5>Title</h5>
-                                                </div>
-                                                <div class="text-start text-wrap" style="font-size: smaller">
-                                                    <p class="mb-3">description</p>
-                                                </div>
-                                                <div class="text-start" style="color:dodgerblue">
-                                                    <p class="mb-0">place</p>
-                                                </div>
-                                                <div class="text-start" style="color:mediumseagreen">
-                                                    <p class="mb-0">money€</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-md-4 col-lg-3 col-sm-6 col-6">
-                                    <a href="#" style="text-decoration: none; color: black">
-                                        <div class="tile">
-                                            <div class="tileUp" style="background-image: url('{{ asset('https://www.pacificfoodmachinery.com.au/media/catalog/product/placeholder/default/no-product-image-400x400.png') }}');">
-                                            </div>
-                                            <div class="tileDown">
-                                                <div class="text-wrap">
-                                                    <h5>Title</h5>
-                                                </div>
-                                                <div class="text-start text-wrap" style="font-size: smaller">
-                                                    <p class="mb-3">description</p>
-                                                </div>
-                                                <div class="text-start" style="color:dodgerblue">
-                                                    <p class="mb-0">place</p>
-                                                </div>
-                                                <div class="text-start" style="color:mediumseagreen">
-                                                    <p class="mb-0">money€</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-
+                                @endforeach
                             </div>
                         </div>
                     </div>
