@@ -15,6 +15,8 @@
 }
 
 
+
+
 .posuvatelny-blok {
     overflow: scroll; /* vytvorenie posúvateľného bloku */
     padding: 10px; /* vnútorný odsadenie obsahu */
@@ -46,7 +48,6 @@
 }
 
 .vyhladavanie {
-
     outline: none;
     border: none;
     padding: 15px;
@@ -59,6 +60,7 @@
     font-size: 25px;
     color: #3498db;
 }
+
 .search button {
     cursor: pointer;
     padding: 0;
@@ -110,10 +112,6 @@
     background-color:#FFF;
 }
 
-.card:hover {
-    box-shadow: 0 5px 5px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-}
-
 .najnovsieText a {
     text-decoration: none;
 }
@@ -124,21 +122,64 @@
     font-size: large;
 }
 
-.vyhladavanieVyhl .vyhladanie {
-    outline: none;
-    border: none;
-    padding: 15px;
-    padding-right: 60px;
-    border: 1px solid #f67d13;
-    border-radius: 15px;
+.searchbar{
+    margin-bottom: auto;
+    margin-top: auto;
+    height: 60px;
     background-color: #ecf0f1;
-    align-items: center;
-    transition: background-color 0.5s, border 0.5s;
-    font-weight: bold;
-    font-size: 15px;
-    color: #3498db;
-    position: relative;
+    border-radius: 15px;
+    padding: 10px;
 }
+
+.search_input::placeholder {
+    color: #c9c9c9;
+}
+
+.search_input{
+    font-weight: bold;
+    font-size: 25px;
+    color: #3498db;
+    border: 0;
+    outline: 0;
+    background: none;
+    width: 0;
+    line-height: 40px;
+    padding: 0 10px;
+    width: 450px;
+
+}
+
+@media screen and (max-width: 992px) {
+    .search_input {
+        width: 400px;
+    }
+}
+
+@media screen and (max-width: 525px) {
+    .search_input {
+        max-width: 250px;
+    }
+}
+
+.search_icon{
+    background: transparent;
+    color: #3498db;
+    font-size: 40px;
+    height: 40px;
+    width: 40px;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    text-decoration:none;
+    transition: color 0.5s;
+}
+
+.search_icon:hover {
+    color: #e67e22;
+}
+
 
 #K_oblecenie {
     background-image: url("/resources/img/oblecenie.jpg");

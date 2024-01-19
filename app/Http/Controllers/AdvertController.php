@@ -57,4 +57,12 @@ class AdvertController extends Controller
 
         //return view('profile')->with(['adverts' => $advert, 'user' => User::findOrFail($advert->user_id)]);
     }
+
+    public function search()
+    {
+        //$this->authorize('update', $advert);
+
+        return view('search');
+    }
+
 }
