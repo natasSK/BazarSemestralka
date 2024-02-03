@@ -1,3 +1,4 @@
+@php use App\Models\FavoriteProduct; @endphp
 @extends('layouts.app')
 
 @section('content')
@@ -57,7 +58,9 @@
                             <form method="GET" action="{{ route('advert.search', ['string' => '']) }}">
                                 <div class="searchbar">
                                     <input class="search_input" type="text" name="string" placeholder="Vyhľadávanie...">
-                                    <button type="submit" class="search_icon"><ion-icon name="search-outline"></ion-icon></button>
+                                    <button type="submit" class="search_icon">
+                                        <ion-icon name="search-outline"></ion-icon>
+                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -69,13 +72,28 @@
                             <div class="row">
                                 @foreach ($adverts as $ad)
                                     <div class="col-md-4 col-lg-3 col-sm-6 col-6">
-                                        <a href="/adverts/{{ $ad->id }}" style="text-decoration: none; color: black">
-                                            <div class="tile">
-                                                <div class="tileUp" style="background-image: url('{{ asset('https://www.pacificfoodmachinery.com.au/media/catalog/product/placeholder/default/no-product-image-400x400.png') }}');">
+                                        <div class="tile">
+                                            <div class="tileUp"
+                                                 style="background-image: url('{{ asset('https://www.pacificfoodmachinery.com.au/media/catalog/product/placeholder/default/no-product-image-400x400.png') }}');">
+                                                @if (FavoriteProduct::isFavorite(auth()->id(), $ad->id))
+                                                    <a href="{{ route('favorites.delete', ['id' => $ad->id]) }}"
+                                                       style="text-align: right; display: block">
+                                                        <ion-icon style="color: red; font-size: 32px"
+                                                                      name="heart-dislike-circle-outline"></ion-icon>
+                                                    </a>
+                                                @else
+                                                    <a href="{{ route('favorites.add', ['id' => $ad->id]) }}"
+                                                       style="text-align: right; display: block">
+                                                        <ion-icon style="color: red; font-size: 32px"
+                                                                  name="heart-circle-outline"></ion-icon>
+                                                    </a>
+                                                @endif
                                                 </div>
                                                 <div class="tileDown">
                                                     <div class="text-wrap">
-                                                        <h5>{{ $ad->title }}</h5>
+                                                        <a href="/adverts/{{ $ad->id }}" style="text-decoration: none; color: black">
+                                                            <h5>{{ $ad->title }}</h5>
+                                                        </a>
                                                     </div>
                                                     <div class="text-start text-wrap" style="font-size: smaller">
                                                         <p class="mb-3">{{ $ad->short_desc }}</p>
@@ -88,7 +106,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </a>
                                     </div>
                                 @endforeach
                             </div>

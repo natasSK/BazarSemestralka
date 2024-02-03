@@ -19,7 +19,6 @@ class MakeAdvertController extends Controller
 
     public function store()
     {
-
         $data = \request()->validate([
             'image' => ['image'],
             'title' => ['required', 'string', 'max:255'],

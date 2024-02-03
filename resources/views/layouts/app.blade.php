@@ -60,6 +60,9 @@
                                     <a class="dropdown-item" href="/profile/{{Auth::user()->id}}">
                                         {{ __('Moje inzeráty') }}
                                     </a>
+                                    <a class="dropdown-item" href="/favorites">
+                                        {{ __('Obľúbené') }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

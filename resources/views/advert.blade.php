@@ -1,3 +1,4 @@
+@php use App\Models\FavoriteProduct; @endphp
 @extends('layouts.app')
 
 @section('content')
@@ -8,7 +9,21 @@
                     <div class="d-flex">
                         <div class="position-relative">
                             <img class="image-fluid" src="https://www.pacificfoodmachinery.com.au/media/catalog/product/placeholder/default/no-product-image-400x400.png" alt="Second slide" style="width: 400px; height: 400px">
-
+                            @if (FavoriteProduct::isFavorite(auth()->id(), $advert->id))
+                                <div class="position-absolute top-0" style="right: 0;">
+                                    <a href="{{ route('favorites.delete', ['id' => $advert->id]) }}">
+                                        <ion-icon style="color: red; font-size: 32px"
+                                                  name="heart-dislike-circle-outline"></ion-icon>
+                                    </a>
+                                </div>
+                            @else
+                                <div class="position-absolute top-0" style="right: 0;">
+                                    <a href="{{ route('favorites.add', ['id' => $advert->id]) }}">
+                                        <ion-icon style="color: red; font-size: 32px"
+                                                  name="heart-circle-outline"></ion-icon>
+                                    </a>
+                                </div>
+                            @endif
                             @can('update', $advert)
                                 <div class="position-absolute top-0 start-0">
                                     <a href="/adverts/{{ $advert->id }}/edit" class="btn btn-warning btn-lg mt-1 mx-1">Uprav</a>
@@ -61,6 +76,7 @@
                 <div class="row my-2 mx-1 overflow-scroll overflow-x-hidden overflow-y-auto border-light-subtle" style="height: 28%; padding: 10px; border: 1px solid">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ullamcorper ullamcorper blandit. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec elementum risus libero, ac blandit est ultrices vulputate. Phasellus vitae porta felis. Curabitur eget massa libero. Aliquam maximus, libero sit amet ornare dignissim, quam quam rhoncus tellus, vitae pharetra ante magna lacinia enim. Nulla facilisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce malesuada at massa non semper. Donec vel odio ut augue dictum lobortis in quis nibh. Nunc sit amet massa massa. Morbi consequat nunc a libero pharetra, eget efficitur metus lobortis. Vivamus mauris ligula, malesuada vel arcu ac, lobortis iaculis justo. Nam pharetra, nunc id efficitur viverra, velit magna pulvinar quam, in iaculis est libero ac magna. Vestibulum et diam quis nulla vestibulum sagittis et ac lorem. In hac habitasse platea dictumst.
                 </div>
+
 
             </div>
 

@@ -54,4 +54,9 @@ class User extends Authenticatable
         return $this->hasMany(Advert::class);
     }
 
+    public function favoriteProducts()
+    {
+        return $this->hasMany(FavoriteProduct::class);
+    }
+
 }

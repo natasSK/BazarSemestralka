@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FavoriteProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,4 +48,10 @@ Route::get('/adverts/{advert}/edit', [App\Http\Controllers\AdvertController::cla
 Route::patch('/adverts/{advert}', [App\Http\Controllers\AdvertController::class, 'update'])->name('advert.update');
 Route::delete('/adverts/{advert}/delete', [App\Http\Controllers\AdvertController::class, 'delete'])->name('advert.delete');
 Route::get('/search/{string?}', [App\Http\Controllers\AdvertController::class, 'search'])->name('advert.search');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/favorites/{id}', [FavoriteProductController::class, 'addToFavorites'])->name('favorites.add');
+    Route::get('/favorites', [FavoriteProductController::class, 'showFavorites'])->name('favorites.show');
+    Route::get('/favorites/delete/{id}', [FavoriteProductController::class, 'deleteFavorite'])->name('favorites.delete');
+});
+
 
