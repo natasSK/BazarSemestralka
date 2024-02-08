@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdvertController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FavoriteProductController;
 
@@ -53,5 +54,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/favorites', [FavoriteProductController::class, 'showFavorites'])->name('favorites.show');
     Route::get('/favorites/delete/{id}', [FavoriteProductController::class, 'deleteFavorite'])->name('favorites.delete');
 });
+Route::get('/search', [AdvertController::class, 'search'])->name('search');
 
 

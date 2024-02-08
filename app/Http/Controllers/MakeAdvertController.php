@@ -22,9 +22,12 @@ class MakeAdvertController extends Controller
         $data = \request()->validate([
             'image' => ['image'],
             'title' => ['required', 'string', 'max:255'],
-            'place' => ['required', 'string', 'max:255'],
+            'place' => ['required'],
             'price' => ['required', 'integer'],
-            'short_desc' => ['required', 'string', 'max:255'],
+            'short_desc' => ['required', 'string', 'max:30'],
+            'category' => ['required'],
+            'type' => ['required'],
+            'description' => ['required', 'string', 'max:2000'],
         ]);
 
         // \App\Models\Advert::create($data); //TODO Dodať fotku a dlhy popis
@@ -33,6 +36,9 @@ class MakeAdvertController extends Controller
             'place' => $data['place'],
             'price' => $data['price'],
             'short_desc' => $data['short_desc'],
+            'category' => $data['category'],
+            'type' => $data['type'],
+            'description' => $data['description'],
         ]);
 
         $user = auth()->user();

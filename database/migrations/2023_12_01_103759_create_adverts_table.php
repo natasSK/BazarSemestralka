@@ -16,8 +16,11 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('title');
             $table->string('short_desc');
+            $table->string('description');
             $table->string('place');
             $table->integer('price');
+            $table->string('type');
+            $table->string('category');
             $table->timestamps();
         });
     }
