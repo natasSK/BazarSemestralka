@@ -137,180 +137,13 @@ ratingStars.forEach((star) => {
     });
 });
 
-
-
-// app.js
-/*
-$(document).ready(function () {
-    const ratingStars = document.querySelectorAll('.rating > span');
-
-    ratingStars.forEach((star) => {
-        star.addEventListener('click', function () {
-            const ratingValue = this.getAttribute('data-rating');
-            const userId = $(this).closest('.rating').data('user-id');
-            const csrfToken = $(this).closest('.rating').data('csrf-token');
-
-            $.ajax({
-                type: 'POST',
-                url: '/profile/' + userId + '/rate',
-                data: {
-                    'rating': ratingValue,
-                    '_token': csrfToken,
-                },
-                success: function (response) {
-                    // Aktualizácia hodnotenia na obrazovke
-                    updateRatingDisplay(response.rating);
-                },
-                error: function (error) {
-                    console.error('Chyba pri pridávaní hodnotenia:', error);
-                }
-            });
-        });
-    });
-
-    function updateRatingDisplay(rating) {
-        const ratingStars = document.querySelectorAll('.rating > span');
-
-        ratingStars.forEach((star, index) => {
-            const innerStarIcon = star.querySelector('ion-icon');
-            const innerRatingValue = index + 1; // Hodnotenie hviezdičky (1, 2, 3, ...)
-
-            if (innerRatingValue <= rating) {
-                innerStarIcon.setAttribute('name', 'star');
-            } else {
-                innerStarIcon.setAttribute('name', 'star-outline');
-            }
-        });
-    }
-
-});
-*/
-/*
-$(document).ready(function () {
-    const userId = $('.rating').data('user-id');
-    const csrfToken = $(this).closest('.rating').data('csrf-token');
-
-    // Načítajte priemerné hodnotenie zo servera a aktualizujte stránku
-    $.ajax({
-        type: 'GET',
-        url: '/profile/' + userId + '/average-rating',
-        success: function (response) {
-            updateAverageRating(response.averageRating);
-        },
-        error: function (error) {
-            console.error('Chyba pri načítaní priemeru hodnotenia:', error);
-        }
-    });
-
-    const ratingStars = document.querySelectorAll('.rating > span');
-
-    ratingStars.forEach((star) => {
-        star.addEventListener('click', function () {
-            const ratingValue = this.getAttribute('data-rating');
-            const csrfToken = $(this).closest('.rating').data('csrf-token');
-
-            $.ajax({
-                type: 'POST',
-                url: '/profile/' + userId + '/rate',
-                data: {
-                    'rating': ratingValue,
-                    '_token': csrfToken,
-                },
-                success: function (response) {
-                    // Aktualizácia hodnotenia a priemeru na obrazovke
-                    updateRatingDisplay(response.rating);
-                    updateAverageRating(response.averageRating);
-                },
-                error: function (error) {
-                    console.error('Chyba pri pridávaní hodnotenia:', error);
-                }
-            });
-        });
-    });
-
-    function updateAverageRating(averageRating) {
-        // Aktualizácia vizuálneho zobrazenia priemeru hodnotenia na stránke
-        $('.user-profile p').text('Average Rating: ' + averageRating);
-        console.log(averageRating);
-    }
-
-    function updateRatingDisplay(rating) {
-        const ratingStars = document.querySelectorAll('.rating > span');
-
-        ratingStars.forEach((star, index) => {
-            const innerStarIcon = star.querySelector('ion-icon');
-            const innerRatingValue = index + 1; // Hodnotenie hviezdičky (1, 2, 3, ...)
-
-            if (innerRatingValue <= rating) {
-                innerStarIcon.setAttribute('name', 'star');
-            } else {
-                innerStarIcon.setAttribute('name', 'star-outline');
-            }
-        });
-    }
-});
-*/
-
 $(document).ready(function () {
     const userId = $('.rating').data('user-id');
     const csrfToken = $('meta[name="csrf-token"]').attr('content');
-/*
-    function updateAverageRating() {
-        // Načítajte priemerné hodnotenie zo servera a aktualizujte stránku
-        $.ajax({
-            type: 'GET',
-            url: '/profile/' + userId + '/average-rating',
-            success: function (response) {
-                const averageRating = response.averageRating;
-                console.log(averageRating);
-                $('.averageRating').text('Average Rating: ' + averageRating);
-            },
-            error: function (error) {
-                console.error('Chyba pri načítaní priemeru hodnotenia:', error);
-            }
-        });
-    }
- */
 
     function updateAverageRating(averageRating) {
-        // Aktualizácia vizuálneho zobrazenia priemeru hodnotenia na stránke
         $('.GlobalAverageRating').text('Priemerné hodnotenie: ' + averageRating);
     }
-
-    const ratingStars = document.querySelectorAll('.rating > span');
-
-    ratingStars.forEach((star) => {
-        star.addEventListener('click', function () {
-
-            if (!userId) {
-                // Presmerujte neprihláseného používateľa na stránku prihlásenia
-                window.location.href = '/login';
-                return;
-            }
-
-            const ratingValue = this.getAttribute('data-rating');
-
-            $.ajax({
-                type: 'POST',
-                url: '/profile/' + userId + '/rate',
-                data: {
-                    'rating': ratingValue,
-                    '_token': csrfToken,
-                },
-                success: function (response) {
-                    // Aktualizácia hodnotenia na obrazovke
-                    updateRatingDisplay(response.rating);
-
-                    // Aktualizácia priemeru hodnotenia na obrazovke
-                    //updateAverageRating();
-                    updateAverageRating(response.averageRating);
-                },
-                error: function (error) {
-                    console.error('Chyba pri pridávaní hodnotenia:', error);
-                }
-            });
-        });
-    });
 
     function updateRatingDisplay(rating) {
         const ratingStars = document.querySelectorAll('.rating > span');
@@ -326,7 +159,45 @@ $(document).ready(function () {
             }
         });
     }
+
+    const ratingStars = document.querySelectorAll('.rating > span');
+
+    ratingStars.forEach((star, index) => {
+        star.addEventListener('click', function () {
+            if (!userId) {
+                window.location.href = '/login';
+                return;
+            }
+
+            const ratingValue = this.getAttribute('data-rating');
+
+            $.ajax({
+                type: 'POST',
+                url: '/profile/' + userId + '/rate',
+                data: {
+                    'rating': ratingValue,
+                    '_token': csrfToken,
+                },
+                success: function (response) {
+                    updateRatingDisplay(response.rating);
+                    updateAverageRating(response.averageRating);
+                },
+                error: function (error) {
+                    console.error('Chyba pri pridávaní hodnotenia:', error);
+                }
+            });
+        });
+
+        // Pri inicializácii nastavte farbu hviezdičiek podľa zaokrúhleného priemeru
+        if (index + 1 <= globalAverageRating) {
+            star.querySelector('ion-icon').setAttribute('name', 'star');
+        }
+    });
 });
+
+const userId = $('.rating').data('user-id');
+const csrfToken = $('meta[name="csrf-token"]').attr('content');
+const globalAverageRating = Math.round(parseFloat($('#average-rating').text()));
 
 
 
