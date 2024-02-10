@@ -1,3 +1,4 @@
+@php use App\Models\FavoriteProduct; @endphp
 @extends('layouts.app')
 
 @section('content')
@@ -176,91 +177,42 @@
 
     <div class="container najnovsie">
         <div class="row">
-            <div class="col-md-4 col-lg-2 col-sm-4">
-                <div class="tile">
-                    <img src="/resources/img/auta.webp" alt="Obrázok" style="width: 100px; height: 100px">
-                    <div class="text-block">
-                        <h6>Xiaomi redmi note 9 pro plus</h6>
-                    </div>
-                    <div class="text-block">
-                        <h7><ion-icon name="logo-euro" style="color: green"></ion-icon> 399</h7>
-                    </div>
-                    <div class="text-block">
-                        <h7><ion-icon name="location-sharp" style="color: blue"></ion-icon> Skalité</h7>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-lg-2 col-sm-4">
-                <div class="tile">
-                    <img src="/resources/img/auta.webp" alt="Obrázok" style="width: 100px; height: 100px">
-                    <div class="text-block">
-                        <h6>Xiaomi redmi note 9 pro plus</h6>
-                    </div>
-                    <div class="text-block">
-                        <h7><ion-icon name="logo-euro" style="color: green"></ion-icon> 399</h7>
-                    </div>
-                    <div class="text-block">
-                        <h7><ion-icon name="location-sharp" style="color: blue"></ion-icon> Skalité</h7>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-lg-2 col-sm-4">
-                <div class="tile">
-                    <img src="/resources/img/auta.webp" alt="Obrázok" style="width: 100px; height: 100px">
-                    <div class="text-block">
-                        <h6>Xiaomi redmi note 9 pro plus</h6>
-                    </div>
-                    <div class="text-block">
-                        <h7><ion-icon name="logo-euro" style="color: green"></ion-icon> 399</h7>
-                    </div>
-                    <div class="text-block">
-                        <h7><ion-icon name="location-sharp" style="color: blue"></ion-icon> Skalité</h7>
+            @foreach ($adverts as $ad)
+                <div class="col-md-3 col-lg-2 col-sm-4 col-4">
+                    <div class="tile">
+                        <div class="tileUp" style="background-image: url('{{ asset('https://www.pacificfoodmachinery.com.au/media/catalog/product/placeholder/default/no-product-image-400x400.png') }}');">
+                            <a href="#" class="toggle-favorite" style="text-align: right; display: block"
+                               data-advert-id="{{ $ad->id }}"
+                               data-csrf-token="{{ csrf_token() }}"
+                               data-is-favorite="{{ FavoriteProduct::isFavorite(auth()->id(), $ad->id) ? 'true' : 'false' }}">
+                                @if (FavoriteProduct::isFavorite(auth()->id(), $ad->id))
+                                    <ion-icon style="color: red; font-size: 32px"
+                                              name="heart-dislike-circle-outline"></ion-icon>
+                                @else
+                                    <ion-icon style="color: red; font-size: 32px"
+                                              name="heart-circle-outline"></ion-icon>
+                                @endif
+                            </a>
+                        </div>
+                        <div class="tileDown">
+                            <div class="text-wrap">
+                                <a href="/adverts/{{ $ad->id }}" style="text-decoration: none; color: black">
+                                    <h5>{{ $ad->title }}</h5>
+                                </a>
+                            </div>
+                            <div class="text-start text-wrap" style="font-size: smaller">
+                                <p class="mb-3">{{ $ad->short_desc }}</p>
+                            </div>
+                            <div class="text-start" style="color:dodgerblue">
+                                <p class="mb-0">{{ $ad->place }}</p>
+                            </div>
+                            <div class="text-start" style="color:mediumseagreen">
+                                <p class="mb-0">{{ $ad->price }}€</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4 col-lg-2 col-sm-4">
-                <div class="tile">
-                    <img src="/resources/img/auta.webp" alt="Obrázok" style="width: 100px; height: 100px">
-                    <div class="text-block">
-                        <h6>Xiaomi redmi note 9 pro plus</h6>
-                    </div>
-                    <div class="text-block">
-                        <h7><ion-icon name="logo-euro" style="color: green"></ion-icon> 399</h7>
-                    </div>
-                    <div class="text-block">
-                        <h7><ion-icon name="location-sharp" style="color: blue"></ion-icon> Skalité</h7>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-lg-2 col-sm-4">
-                <div class="tile">
-                    <img src="/resources/img/auta.webp" alt="Obrázok" style="width: 100px; height: 100px">
-                    <div class="text-block">
-                        <h6>Xiaomi redmi note 9 pro plus</h6>
-                    </div>
-                    <div class="text-block">
-                        <h7><ion-icon name="logo-euro" style="color: green"></ion-icon> 399</h7>
-                    </div>
-                    <div class="text-block">
-                        <h7><ion-icon name="location-sharp" style="color: blue"></ion-icon> Skalité</h7>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-lg-2 col-sm-4">
-                <div class="tile">
-                    <img src="/resources/img/auta.webp" alt="Obrázok" style="width: 100px; height: 100px">
-                    <div class="text-block">
-                        <h6>Xiaomi redmi note 9 pro plus</h6>
-                    </div>
-                    <div class="text-block">
-                        <h7><ion-icon name="logo-euro" style="color: green"></ion-icon> 399</h7>
-                    </div>
-                    <div class="text-block">
-                        <h7><ion-icon name="location-sharp" style="color: blue"></ion-icon> Skalité</h7>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
-    </div>
+
 @endsection

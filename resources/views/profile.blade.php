@@ -72,7 +72,7 @@
             <form action="{{ route('comment.store', ['id' => $user->id]) }}" method="POST" class="mt-4">
                 @csrf
                 <div class="mb-3">
-                    <label for="comment" class="form-label">Pridaj komentár:</label>
+                    <label for="comment" class="form-label">Pridaj / Uprav komentár:</label>
                     <textarea class="form-control" name="comment" id="comment" cols="30" rows="5"></textarea>
                 </div>
 
