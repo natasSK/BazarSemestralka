@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'username',
         'password',
+        'average_rating',
     ];
 
     /**
@@ -57,6 +58,11 @@ class User extends Authenticatable
     public function favoriteProducts()
     {
         return $this->hasMany(FavoriteProduct::class);
+    }
+
+    public function ratings()
+    {
+        return $this->hasMany(ratings::class, 'user_id');
     }
 
 }

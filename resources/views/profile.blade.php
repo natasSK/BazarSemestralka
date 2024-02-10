@@ -9,13 +9,16 @@
                 <img src="https://holmesbuilders.com/wp-content/uploads/2016/12/male-profile-image-placeholder.png"
                      alt="Užívateľská fotka" class="img-fluid mb-3 rounded-2" style="height: 300px; width: 300px">
                 <h4>{{ $user->username }}</h4>
-                <div class="rating" style="font-size: 32px; color: orange">
+                <div class="rating" style="font-size: 32px; color: orange"
+                     data-user-id="{{ auth()->id() }}"
+                     data-csrf-token="{{ csrf_token() }}">
                     <span data-rating="1"><ion-icon name="star-outline"></ion-icon></span>
                     <span data-rating="2"><ion-icon name="star-outline"></ion-icon></span>
                     <span data-rating="3"><ion-icon name="star-outline"></ion-icon></span>
                     <span data-rating="4"><ion-icon name="star-outline"></ion-icon></span>
                     <span data-rating="5"><ion-icon name="star-outline"></ion-icon></span>
                 </div>
+                <p class="GlobalAverageRating">Priemerné hodnotenie: <span id="average-rating">{{ $globalAverageRating }}</span></p>
                 <p>Email: {{ $user->email }}</p>
                 @can('create', $user)
                     <a href="/a/create" class="btn btn-info btn-lg btn-block">Pridaj</a>

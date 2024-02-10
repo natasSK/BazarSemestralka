@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdvertController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FavoriteProductController;
 
@@ -64,5 +65,10 @@ Route::middleware(['auth'])->group(function () {
 
 });
 Route::get('/search', [AdvertController::class, 'search'])->name('search');
+
+//Route::post('/profile/{userId}/rate', 'UserController@addRating')->middleware('auth');
+
+Route::post('/profile/{userId}/rate', [App\Http\Controllers\ProfileController::class, 'addRating'])->name('profile.rate');
+Route::get('/profile/{userId}/average-rating', [ProfileController::class, 'getAverageRating']);
 
 
