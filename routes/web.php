@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdvertController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FavoriteProductController;
@@ -71,4 +72,8 @@ Route::get('/search', [AdvertController::class, 'search'])->name('search');
 Route::post('/profile/{userId}/rate', [App\Http\Controllers\ProfileController::class, 'addRating'])->name('profile.rate');
 Route::get('/profile/{userId}/average-rating', [ProfileController::class, 'getAverageRating']);
 
+
+Route::post('/user/{id}/comment', [CommentController::class, 'store'])->name('comment.store');
+Route::patch('/comment/{id}', [CommentController::class, 'update'])->name('comment.update');
+Route::delete('/comment/{id}', [CommentController::class, 'destroy'])->name('comment.destroy');
 

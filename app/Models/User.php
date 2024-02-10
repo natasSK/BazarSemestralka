@@ -65,4 +65,8 @@ class User extends Authenticatable
         return $this->hasMany(ratings::class, 'user_id');
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'user_id');
+    }
 }

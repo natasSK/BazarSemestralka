@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="container mt-2">
-        <div class="row">
+        <div class="row mb-2">
             <!-- Ľavý panel s profilom užívateľa -->
             <div class="col-md-4" id="user-profile" style="height: 30%">
                 <img src="https://holmesbuilders.com/wp-content/uploads/2016/12/male-profile-image-placeholder.png"
@@ -68,8 +68,65 @@
                     </div>
                 </div>
             </div>
+            <!-- Formulár na pridanie/upravenie komentára -->
+            <form action="{{ route('comment.store', ['id' => $user->id]) }}" method="POST" class="mt-4">
+                @csrf
+                <div class="mb-3">
+                    <label for="comment" class="form-label">Pridaj komentár:</label>
+                    <textarea class="form-control" name="comment" id="comment" cols="30" rows="5"></textarea>
+                </div>
+
+                <!-- Dropdown pre odporúčanie -->
+                <div class="mb-3">
+                    <label for="recommendation" class="form-label">Hodnotenie:</label>
+                    <select class="form-select" name="recommendation" id="recommendation">
+                        <option value="1">Odporúčam</option>
+                        <option value="0">Neodporúčam</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Uverejni</button>
+            </form>
+
+            <!-- Zobrazenie komentárov -->
+            @forelse($user->comments as $comment)
+                <div class="comment card mt-3">
+                    <div class="card-body">
+                        <p class="card-text">
+
+                            <span class="badge bg-{{ $comment->recommendation == 1 ? 'success' : 'danger' }} fs-4">
+                {{ $comment->recommendation == 1 ? 'Odporúčam' : 'Neodporúčam' }}
+            </span>
+                        </p>
+                        <p class="card-text">{{ $comment->text }}</p>
+                        <p class="card-subtitle text-muted">Uverejnené: {{ $comment->published_at }}</p>
+                        <div class="d-flex align-items-center">
+                            <a href="{{ url('/profile/' . $comment->author->id) }}">
+                                <img src="https://holmesbuilders.com/wp-content/uploads/2016/12/male-profile-image-placeholder.png" alt="Author's Photo" class="rounded-circle me-2" width="40" height="40">
+                            </a>
+                            <p class="card-text">
+                                <a href="{{ url('/profile/' . $comment->author->id) }}" class="text-decoration-none text-dark">
+                                    {{ $comment->author->name }}
+                                </a>
+                            </p>
+
+                        </div>
+                        @if(auth()->user() && auth()->user()->id === $comment->author->id)
+                            <form action="{{ route('comment.destroy', ['id' => $comment->id]) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger ms-auto mt-2">Vymaž</button>
+                            </form>
+                        @endif
+                    </div>
+                </div>
+
+
+            @empty
+                <p class="mt-3 mb-2">Zatiaľ žiadne komentáre</p>
+            @endforelse
         </div>
-    </div>
+        </div>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 @endsection
