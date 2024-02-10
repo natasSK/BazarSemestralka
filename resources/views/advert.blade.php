@@ -9,21 +9,19 @@
                     <div class="d-flex">
                         <div class="position-relative">
                             <img class="image-fluid" src="https://www.pacificfoodmachinery.com.au/media/catalog/product/placeholder/default/no-product-image-400x400.png" alt="Second slide" style="width: 400px; height: 400px">
-                            @if (FavoriteProduct::isFavorite(auth()->id(), $advert->id))
-                                <div class="position-absolute top-0" style="right: 0;">
-                                    <a href="{{ route('favorites.delete', ['id' => $advert->id]) }}">
-                                        <ion-icon style="color: red; font-size: 32px"
-                                                  name="heart-dislike-circle-outline"></ion-icon>
-                                    </a>
-                                </div>
-                            @else
-                                <div class="position-absolute top-0" style="right: 0;">
-                                    <a href="{{ route('favorites.add', ['id' => $advert->id]) }}">
-                                        <ion-icon style="color: red; font-size: 32px"
-                                                  name="heart-circle-outline"></ion-icon>
-                                    </a>
-                                </div>
-                            @endif
+                            <a href="#" class="toggle-favorite position-absolute top-0" style="right: 0;"
+                               data-advert-id="{{ $advert->id }}"
+                               data-csrf-token="{{ csrf_token() }}"
+                               data-is-favorite="{{ FavoriteProduct::isFavorite(auth()->id(), $advert->id) ? 'true' : 'false' }}">
+                                @if (FavoriteProduct::isFavorite(auth()->id(), $advert->id))
+                                    <ion-icon style="color: red; font-size: 32px"
+                                              name="heart-dislike-circle-outline"></ion-icon>
+                                @else
+                                    <ion-icon style="color: red; font-size: 32px"
+                                              name="heart-circle-outline"></ion-icon>
+                                @endif
+                            </a>
+
                             @can('update', $advert)
                                 <div class="position-absolute top-0 start-0">
                                     <a href="/adverts/{{ $advert->id }}/edit" class="btn btn-warning btn-lg mt-1 mx-1">Uprav</a>

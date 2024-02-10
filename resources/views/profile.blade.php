@@ -9,10 +9,18 @@
                 <img src="https://holmesbuilders.com/wp-content/uploads/2016/12/male-profile-image-placeholder.png"
                      alt="Užívateľská fotka" class="img-fluid mb-3 rounded-2" style="height: 300px; width: 300px">
                 <h4>{{ $user->username }}</h4>
+                <div class="rating" style="font-size: 32px; color: orange">
+                    <span data-rating="1"><ion-icon name="star-outline"></ion-icon></span>
+                    <span data-rating="2"><ion-icon name="star-outline"></ion-icon></span>
+                    <span data-rating="3"><ion-icon name="star-outline"></ion-icon></span>
+                    <span data-rating="4"><ion-icon name="star-outline"></ion-icon></span>
+                    <span data-rating="5"><ion-icon name="star-outline"></ion-icon></span>
+                </div>
                 <p>Email: {{ $user->email }}</p>
                 @can('create', $user)
                     <a href="/a/create" class="btn btn-info btn-lg btn-block">Pridaj</a>
                 @endcan
+
             </div>
             <!-- Pravý panel s inzerátmi (tiles) -->
             <div class="col-md-8 mt-5">
@@ -21,21 +29,19 @@
                         @foreach ($adverts as $ad)
                             <div class="col-md-6 col-lg-4">
                                     <div class="tile">
-                                        <div class="tileUp"
-                                             style="background-image: url('{{ asset('https://www.pacificfoodmachinery.com.au/media/catalog/product/placeholder/default/no-product-image-400x400.png') }}');">
-                                            @if (FavoriteProduct::isFavorite(auth()->id(), $ad->id))
-                                                <a href="{{ route('favorites.delete', ['id' => $ad->id]) }}"
-                                                   style="text-align: right; display: block">
+                                        <div class="tileUp" style="background-image: url('{{ asset('https://www.pacificfoodmachinery.com.au/media/catalog/product/placeholder/default/no-product-image-400x400.png') }}');">
+                                            <a href="#" class="toggle-favorite" style="text-align: right; display: block"
+                                               data-advert-id="{{ $ad->id }}"
+                                               data-csrf-token="{{ csrf_token() }}"
+                                               data-is-favorite="{{ FavoriteProduct::isFavorite(auth()->id(), $ad->id) ? 'true' : 'false' }}">
+                                                @if (FavoriteProduct::isFavorite(auth()->id(), $ad->id))
                                                     <ion-icon style="color: red; font-size: 32px"
                                                               name="heart-dislike-circle-outline"></ion-icon>
-                                                </a>
-                                            @else
-                                                <a href="{{ route('favorites.add', ['id' => $ad->id]) }}"
-                                                   style="text-align: right; display: block">
+                                                @else
                                                     <ion-icon style="color: red; font-size: 32px"
                                                               name="heart-circle-outline"></ion-icon>
-                                                </a>
-                                            @endif
+                                                @endif
+                                            </a>
                                         </div>
                                         <div class="tileDown">
                                             <div class="text-wrap">

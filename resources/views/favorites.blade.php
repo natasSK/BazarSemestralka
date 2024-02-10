@@ -1,3 +1,4 @@
+@php use App\Models\FavoriteProduct; @endphp
 @extends('layouts.app')
 
 @section('content')
@@ -11,7 +12,18 @@
                         <div class="col-md-6 col-lg-4">
                                 <div class="tile">
                                     <div class="tileUp" style="background-image: url('{{ asset('https://www.pacificfoodmachinery.com.au/media/catalog/product/placeholder/default/no-product-image-400x400.png') }}');">
-                                        <a href="{{ route('favorites.delete', ['id' => $ad->id]) }}" style="text-align: right; display: block"><ion-icon style="color: red; font-size: 32px" name="heart-dislike-circle-outline"></ion-icon></a>
+                                        <a href="#" class="toggle-favorite" style="text-align: right; display: block"
+                                           data-advert-id="{{ $ad->id }}"
+                                           data-csrf-token="{{ csrf_token() }}"
+                                           data-is-favorite="{{ FavoriteProduct::isFavorite(auth()->id(), $ad->id) ? 'true' : 'false' }}">
+                                            @if (FavoriteProduct::isFavorite(auth()->id(), $ad->id))
+                                                <ion-icon style="color: red; font-size: 32px"
+                                                          name="heart-dislike-circle-outline"></ion-icon>
+                                            @else
+                                                <ion-icon style="color: red; font-size: 32px"
+                                                          name="heart-circle-outline"></ion-icon>
+                                            @endif
+                                        </a>
                                     </div>
                                     <div class="tileDown">
                                         <div class="text-wrap">

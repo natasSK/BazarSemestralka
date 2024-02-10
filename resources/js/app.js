@@ -37,5 +37,102 @@ app.component('example-component', ExampleComponent);
  */
 
 app.mount('#app');
+/*
+$(document).ready(function() {
+    $('.toggle-favorite').click(function(e) {
+        e.preventDefault();
+
+        var element = $(this);
+        var advertId = element.data('advert-id');
+        var csrfToken = element.data('csrf-token');
+        var isFavorite = element.data('is-favorite') === 'true';
+
+        var url = isFavorite ? `/favorites/delete/${advertId}` : `/favorites/add/${advertId}`;
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: {
+                _token: csrfToken
+            },
+            success: function(response) {
+                updateDOMAfterFavoriteToggle(element, isFavorite);
+            },
+            error: function(error) {
+                console.error('Chyba pri pridávaní/odstraňovaní z obľúbených:', error);
+            }
+        });
+    });
+
+    function updateDOMAfterFavoriteToggle(element, isAdding) {
+        if (isAdding) {
+           // element.html('<ion-icon style="color: blue; font-size: 32px" name="heart-dislike-circle-outline"></ion-icon>');
+            element.data('is-favorite', 'true');
+        } else {
+           // element.html('<ion-icon style="color: blue; font-size: 32px" name="heart-circle-outline"></ion-icon>');
+            element.data('is-favorite', 'false');
+        }
+    }
+});
+ */
+
+$(document).ready(function() {
+    $('.toggle-favorite').click(function(e) {
+        e.preventDefault();
+
+        var element = $(this); // Uložte odkaz na element pre použitie v success callbacku
+        var advertId = element.data('advert-id');
+        var csrfToken = element.data('csrf-token');
+        var isFavorite = element.data('is-favorite') === 'true';
+
+        $.ajax({
+            type: 'POST',
+            url: '/favorites/toggle/' + advertId,
+            data: {
+                _token: csrfToken
+            },
+            success: function(response) {
+                updateDOMAfterFavoriteToggle(element, isFavorite);
+            },
+            error: function(error) {
+                console.error('Chyba pri pridávaní/odstraňovaní z obľúbených:', error);
+            }
+        });
+    });
+
+    function updateDOMAfterFavoriteToggle(element, isAdding) {
+        if (isAdding) {
+            element.html('<ion-icon style="color: red; font-size: 32px" name="heart-dislike-circle-outline"></ion-icon>');
+            element.data('is-favorite', 'false'); // Opravené pre obrátenie hodnoty
+        } else {
+            element.html('<ion-icon style="color: red; font-size: 32px" name="heart-circle-outline"></ion-icon>');
+            element.data('is-favorite', 'true'); // Opravené pre obrátenie hodnoty
+        }
+    }
+});
 
 
+const ratingStars = document.querySelectorAll('.rating > span');
+
+ratingStars.forEach((star) => {
+    star.addEventListener('mouseover', function () {
+        const ratingValue = this.getAttribute('data-rating');
+        ratingStars.forEach((innerStar) => {
+            const innerStarIcon = innerStar.querySelector('ion-icon');
+            const innerRatingValue = innerStar.getAttribute('data-rating');
+            if (innerRatingValue <= ratingValue) {
+                innerStarIcon.setAttribute('name', 'star');
+            } else {
+                innerStarIcon.setAttribute('name', 'star-outline');
+            }
+        });
+    });
+
+    star.addEventListener('mouseout', function () {
+        ratingStars.forEach((innerStar) => {
+            const innerStarIcon = innerStar.querySelector('ion-icon');
+            const innerRatingValue = innerStar.getAttribute('data-rating');
+            innerStarIcon.setAttribute('name', 'star-outline');
+        });
+    });
+});
