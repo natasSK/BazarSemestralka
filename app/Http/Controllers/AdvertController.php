@@ -81,9 +81,9 @@ class AdvertController extends Controller
         $title = $request->input('string');
         $minPrice = $request->input('cenaOd');
         $maxPrice = $request->input('cenaDo');
-        $type = $request->input('type');
-        $category = $request->input('category');
-        $place = $request->input('place');
+        $type = $request->input('type', 'Nevybrane'); // Predvolená hodnota pre 'type' je 'Nevybrane'
+        $category = $request->input('category', 'Nevybrane'); // Predvolená hodnota pre 'category' je 'Nevybrane'
+        $place = $request->input('place', 'Nevybrane'); // Predvolená hodnota pre 'place' je 'Nevybrane'
 
         $adverts = Advert::query();
 
@@ -100,22 +100,24 @@ class AdvertController extends Controller
         }
 
         if ($type != "Nevybrane") {
-            $adverts->where('type', $type)->get();
+            $adverts->where('type', $type);
         }
 
         if ($category != "Nevybrane") {
-            $adverts->where('category', $category)->get();
+            $adverts->where('category', $category);
         }
 
         if ($place != "Nevybrane") {
-            $adverts->where('place', $place)->get();
+            $adverts->where('place', $place);
         }
-
 
         $result = $adverts->get();
 
         return view('search', ['adverts' => $result]);
     }
+
+
+
 
 
 }
