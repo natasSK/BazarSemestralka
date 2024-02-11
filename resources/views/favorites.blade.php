@@ -9,7 +9,7 @@
             <div class="container najnovsie">
                 <div class="row">
                     @foreach ($adverts as $ad)
-                        <div class="col-md-6 col-lg-4">
+                        <div class="col-md-6 col-lg-4 col-sm-5 col-4">
                                 <div class="tile">
                                     <div class="tileUp" style="background-image: url('{{ $ad->photo ? asset('storage/' . $ad->photo) : asset('https://www.pacificfoodmachinery.com.au/media/catalog/product/placeholder/default/no-product-image-400x400.png') }}');">
                                         <a href="#" class="toggle-favorite" style="text-align: right; display: block"

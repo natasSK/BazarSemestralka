@@ -33,14 +33,12 @@ class MakeAdvertController extends Controller
             'description' => ['required', 'string', 'max:2000'],
         ]);
 
-        // Spracovanie fotky, ak bola poslaná
         $photoPath = null;
         if ($request->hasFile('photo')) {
             $photo = $request->file('photo');
-            $photoPath = $photo->store('advert_photos', 'public'); // Uloženie súboru a získanie cesty
+            $photoPath = $photo->store('advert_photos', 'public');
         }
 
-        // Vytvorenie inzerátu s informáciami a priradenie fotky
         $advert = $user->adverts()->create([
             'title' => $data['title'],
             'place' => $data['place'],
@@ -52,8 +50,8 @@ class MakeAdvertController extends Controller
             'photo' => $photoPath, // Priradenie cesty k fotke
         ]);
 
-        $adverts = auth()->user()->adverts;
-        return view('profile')->with(['user' => $user, 'adverts' => $adverts]);
+        $adverts = Advert::latest()->take(6)->get();
+        return view('home', compact('adverts'));
     }
 
 }

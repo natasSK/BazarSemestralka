@@ -9,6 +9,6 @@ class Profile extends Model
 {
     public function user()
     {
-        return $this->belongsTo(User::class); //jeden user bude mať jeden profil
+        return $this->belongsTo(User::class);
     }
 }

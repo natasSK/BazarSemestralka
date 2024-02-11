@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <div class="col offset-2 my-2">
+        <div class="col offset-2 my-4">
             <h1>Pridaj nový inzerát</h1>
         </div>
         <form action="/a" enctype="multipart/form-data" method="post">

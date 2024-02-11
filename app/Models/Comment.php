@@ -16,12 +16,10 @@ class Comment extends Model
         'name',
         'published_at',
         'recommendation',
-        // Doplniť ďalšie fillable stĺpce podľa potreby, napr. 'user_photo'
     ];
 
-    protected $dates = ['published_at']; // Definícia pre typ dátumu pre published_at stĺpec
+    protected $dates = ['published_at'];
 
-    // Vzťahy k iným modelom
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

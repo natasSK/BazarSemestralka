@@ -13,6 +13,7 @@
                             @else
                                 <img class="image-fluid" src="https://www.pacificfoodmachinery.com.au/media/catalog/product/placeholder/default/no-product-image-400x400.png" alt="Second slide" style="width: 400px; height: 400px">
                             @endif
+                            @auth
                             <a href="#" class="toggle-favorite position-absolute top-0" style="right: 0;"
                                data-advert-id="{{ $advert->id }}"
                                data-csrf-token="{{ csrf_token() }}"
@@ -25,6 +26,7 @@
                                               name="heart-circle-outline"></ion-icon>
                                 @endif
                             </a>
+                                @endauth
 
                             @can('update', $advert)
                                 <div class="position-absolute top-0 start-0">

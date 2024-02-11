@@ -17,10 +17,8 @@ class FavoriteProductController extends Controller
         $user = auth()->user();
         $favoriteProducts = $user->favoriteProducts;
 
-        // Získajte id všetkých obľúbených reklám
         $advertIds = $favoriteProducts->pluck('advert_id');
 
-        // Načítajte reklamy, ktoré majú príslušné advert_id
         $adverts = Advert::whereIn('id', $advertIds)->get();
 
         return view('favorites', [
@@ -61,17 +59,15 @@ class FavoriteProductController extends Controller
 
     public function toggleFavorite($advertId)
     {
-        $user = auth()->user(); // Získaj aktuálneho prihláseného používateľa
-        $advert = Advert::find($advertId); // Nájdi inzerát podľa ID
+        $user = auth()->user();
+        $advert = Advert::find($advertId);
 
         if (!$user || !$advert) {
             return response()->json(['success' => false, 'message' => 'Nesprávna žiadosť']);
         }
 
-        // Skontroluj, či je inzerát už v obľúbených pre daného používateľa
         $isFavorite = $user->favoriteProducts()->where('advert_id', $advertId)->exists();
 
-        // Ak je v obľúbených, odstráň ho, inak pridaj
         if ($isFavorite) {
             $favoriteProduct = FavoriteProduct::where('user_id', $user->id)
                 ->where('advert_id', $advert->id)
@@ -91,7 +87,6 @@ class FavoriteProductController extends Controller
 
         return response()->json(['success' => true, 'message' => $message]);
     }
-
 }
 
 

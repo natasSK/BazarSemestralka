@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <div class="col offset-2 my-2">
+        <div class="col offset-2 my-4 ">
             <h1>Uprav profilové informácie</h1>
         </div>
         <form action="{{ route('update-profile', ['id' => $user->id]) }}" enctype="multipart/form-data" method="post">
@@ -10,18 +10,18 @@
             @method('PATCH')
 
             <div class="row my-3">
-                <label for="image" class="col-md-4 col-form-label text-md-end col-lg-4 col-xl-3 col-xxl-3">{{ __('Fotka') }}</label>
+                <label for="image" class="col-md-4 col-form-label text-md-end col-lg-3">{{ __('Fotka') }}</label>
                 <div class="col-md-6">
+                    @if($user->photo)
+                        <img src="{{ asset('storage/' . $user->photo) }}" alt="Current Photo" class="img-thumbnail mb-3" style="max-height: 150px">
+                    @endif
                     <input id="image" type="file" class="form-control-file @error('photo') is-invalid @enderror" name="photo">
-
-                    <!-- Tlačidlo na vymazanie fotky -->
                     <div class="form-check my-3">
                         <input class="form-check-input" type="checkbox" id="delete_photo" name="delete_photo" value="1">
                         <label class="form-check-label" for="delete_photo">
                             Vymazať fotku
                         </label>
                     </div>
-
                     @error('photo')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>

@@ -45,14 +45,12 @@ class AdvertController extends Controller
 
         $advert->update($data);
 
-        // Spracovanie fotky, ak bola poslaná
         if (request()->hasFile('photo')) {
             $photo = request()->file('photo');
-            $photoPath = $photo->store('advert_photos', 'public'); // Uloženie súboru a získanie cesty
+            $photoPath = $photo->store('advert_photos', 'public');
             $advert->photo = $photoPath;
         }
 
-        // Vymazanie fotky, ak je požadované
         $advert->photo = (request()->has('delete_photo') && request()->input('delete_photo') == 1) ? null : $advert->photo;
 
         $advert->save();
@@ -63,7 +61,6 @@ class AdvertController extends Controller
 
     public function delete(Advert $advert)
     {
-
         $this->authorize('delete', $advert);
         $advert->delete();
 
@@ -71,9 +68,6 @@ class AdvertController extends Controller
         $adverts = $user->adverts;
 
         return view('profile')->with(['adverts' => $adverts, 'user' => User::findOrFail($advert->user_id)]);
-
-
-        //return view('profile')->with(['adverts' => $advert, 'user' => User::findOrFail($advert->user_id)]);
     }
 
     public function search(Request $request)
@@ -81,9 +75,9 @@ class AdvertController extends Controller
         $title = $request->input('string');
         $minPrice = $request->input('cenaOd');
         $maxPrice = $request->input('cenaDo');
-        $type = $request->input('type', 'Nevybrane'); // Predvolená hodnota pre 'type' je 'Nevybrane'
-        $category = $request->input('category', 'Nevybrane'); // Predvolená hodnota pre 'category' je 'Nevybrane'
-        $place = $request->input('place', 'Nevybrane'); // Predvolená hodnota pre 'place' je 'Nevybrane'
+        $type = $request->input('type', 'Nevybrane');
+        $category = $request->input('category', 'Nevybrane');
+        $place = $request->input('place', 'Nevybrane');
 
         $adverts = Advert::query();
 
@@ -115,9 +109,4 @@ class AdvertController extends Controller
 
         return view('search', ['adverts' => $result]);
     }
-
-
-
-
-
 }

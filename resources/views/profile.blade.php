@@ -34,23 +34,22 @@
                     <span data-rating="5"><ion-icon name="star-outline"></ion-icon></span>
                 </div>
                 <p class="GlobalAverageRating">Priemerné hodnotenie: <span id="average-rating">{{ $globalAverageRating }}</span></p>
-                @can('create', $user)
-                    <a href="/a/create" class="btn btn-info btn-lg btn-block">Pridaj</a>
-                @endcan
 
             </div>
             <!-- Pravý panel s inzerátmi (tiles) -->
-            <div class="col-md-8 mt-5">
+            <div class="col-md-8 mt-5 col-sm-5 col-5">
                 <div class="container najnovsie">
                     <div class="row">
                         @foreach ($adverts as $ad)
                             <div class="col-md-6 col-lg-4">
                                     <div class="tile">
                                         <div class="tileUp" style="background-image: url('{{ $ad->photo ? asset('storage/' . $ad->photo) : asset('https://www.pacificfoodmachinery.com.au/media/catalog/product/placeholder/default/no-product-image-400x400.png') }}');">
+                                            @auth
                                             <a href="#" class="toggle-favorite" style="text-align: right; display: block"
                                                data-advert-id="{{ $ad->id }}"
                                                data-csrf-token="{{ csrf_token() }}"
                                                data-is-favorite="{{ FavoriteProduct::isFavorite(auth()->id(), $ad->id) ? 'true' : 'false' }}">
+
                                                 @if (FavoriteProduct::isFavorite(auth()->id(), $ad->id))
                                                     <ion-icon style="color: red; font-size: 32px"
                                                               name="heart-dislike-circle-outline"></ion-icon>
@@ -59,6 +58,7 @@
                                                               name="heart-circle-outline"></ion-icon>
                                                 @endif
                                             </a>
+                                            @endauth
                                         </div>
                                         <div class="tileDown">
                                             <div class="text-wrap">
@@ -82,6 +82,7 @@
                     </div>
                 </div>
             </div>
+            @auth
             <!-- Formulár na pridanie/upravenie komentára -->
             <form action="{{ route('comment.store', ['id' => $user->id]) }}" method="POST" class="mt-4">
                 @csrf
@@ -101,6 +102,7 @@
 
                 <button type="submit" class="btn btn-primary">Uverejni</button>
             </form>
+            @endauth
 
             <!-- Zobrazenie komentárov -->
             @forelse($user->comments as $comment)
