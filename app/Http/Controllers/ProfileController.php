@@ -23,7 +23,7 @@ class ProfileController extends Controller
         if ($globalRatingRecord) {
             $globalAverageRating = $globalRatingRecord->average_rating;
         } else {
-            $globalAverageRating = 0.00; // alebo nejaká iná predvolená hodnota
+            $globalAverageRating = 0.00;
         }
         return view('profile', [
             'user' => $user,

@@ -9,21 +9,19 @@
                     <div class="d-flex">
                         <div class="position-relative">
                             @if ($advert->photo)
-                                <img src="{{ asset('storage/' . $advert->photo) }}" alt="Second slide" style="width: 400px; height: 400px">
+                                <img class="image-fluid adMainImage" src="{{ asset('storage/' . $advert->photo) }}" alt="Fotka">
                             @else
-                                <img class="image-fluid" src="https://www.pacificfoodmachinery.com.au/media/catalog/product/placeholder/default/no-product-image-400x400.png" alt="Second slide" style="width: 400px; height: 400px">
+                                <img class="image-fluid adMainImage" src="https://www.pacificfoodmachinery.com.au/media/catalog/product/placeholder/default/no-product-image-400x400.png" alt="Fotka">
                             @endif
                             @auth
-                            <a href="#" class="toggle-favorite position-absolute top-0" style="right: 0;"
+                            <a href="#" class="toggle-favorite position-absolute top-0 adToFavoritesLink"
                                data-advert-id="{{ $advert->id }}"
                                data-csrf-token="{{ csrf_token() }}"
                                data-is-favorite="{{ FavoriteProduct::isFavorite(auth()->id(), $advert->id) ? 'true' : 'false' }}">
                                 @if (FavoriteProduct::isFavorite(auth()->id(), $advert->id))
-                                    <ion-icon style="color: red; font-size: 32px"
-                                              name="heart-dislike-circle-outline"></ion-icon>
+                                    <ion-icon name="heart-dislike-circle-outline"></ion-icon>
                                 @else
-                                    <ion-icon style="color: red; font-size: 32px"
-                                              name="heart-circle-outline"></ion-icon>
+                                    <ion-icon name="heart-circle-outline"></ion-icon>
                                 @endif
                             </a>
                                 @endauth
@@ -42,22 +40,21 @@
                 </div>
             </div>
             <div class="col-lg textInfo mx-3">
-                <div class="row my-2 mx-1 text-truncate fw-bold fs-1" style="height: 15%">
+                <div class="row my-2 mx-1 text-truncate fw-bold fs-1 adTitle">
                     <p>{{ $advert->title }}</p>
                 </div>
                 <div class="row">
                     <div class="col-7 py-1">
-                        <a href="{{ route('profile.show', ['user' => $advert->user_id]) }}" style="text-decoration: none; color: black">
+                        <a class="linkProfile" href="{{ route('profile.show', ['user' => $advert->user_id]) }}">
                             <div class="row mx-2">
-                                <div class="d-inline" style="width: 120px">
+                                <div class="d-inline firstHalf">
                                     @if ($user->photo)
-                                        <img src="{{ asset('storage/' . $user->photo) }}" alt="Užívateľská fotka" class="img-fluid rounded-5"
-                                             style="height: 100px; width: 120px">
+                                        <img src="{{ asset('storage/' . $user->photo) }}" alt="Užívateľská fotka" class="img-fluid rounded-5">
                                     @else
-                                        <img src="https://holmesbuilders.com/wp-content/uploads/2016/12/male-profile-image-placeholder.png" class="img-fluid rounded-5" alt="Profilový obrázok" style="height: 100px; width: 120px">
+                                        <img src="https://holmesbuilders.com/wp-content/uploads/2016/12/male-profile-image-placeholder.png" class="img-fluid rounded-5" alt="Profilový obrázok">
                                     @endif
                                 </div>
-                                <div class="d-inline" style="width: 50%; margin-top: 25px;">
+                                <div class="d-inline secondHalf">
                                     <h5>{{ $user->username }}</h5>
                                     <p>{{ $user->email }}</p>
                                 </div>
@@ -65,18 +62,18 @@
                         </a>
                     </div>
                     <div class="col">
-                        <div class="row mt-3 mx-1 fw-bold" style="color: dodgerblue; font-size: large">
-                            <p class="my-1" style="font-size: larger">{{ $advert->place }}</p>
+                        <div class="row mt-3 mx-1 fw-bold adPlaceMain">
+                            <p class="my-1">{{ $advert->place }}</p>
                         </div>
-                        <div class="row mt-1 mx-1 fw-bold" style="color:mediumseagreen; font-size: large">
-                            <p class="my-1" style="font-size: larger">{{ $advert->price }}€</p>
+                        <div class="row mt-1 mx-1 fw-bold adPriceMain">
+                            <p class="my-1">{{ $advert->price }}€</p>
                         </div>
                     </div>
                 </div>
                 <div class="row my-2 mx-1">
                     Stav: {{ $advert->type }}, Kategória: {{ $advert->category }}, z dňa {{ $advert->created_at }} (č. {{ $advert->id }})
                 </div>
-                <div class="row my-2 mx-1 overflow-scroll overflow-x-hidden overflow-y-auto border-light-subtle" style="height: 28%; padding: 10px; border: 1px solid">
+                <div class="row my-2 mx-1 overflow-scroll overflow-x-hidden overflow-y-auto border-light-subtle adDescription">
                     {{ $advert->description }}
                 </div>
             </div>

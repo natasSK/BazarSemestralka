@@ -47,7 +47,6 @@ class CommentController extends Controller
             abort(403, 'Nemáte oprávnenie upravovať tento komentár.');
         }
 
-        // Aktualizácia komentára
         $comment->update([
             'text' => $request->input('comment'),
         ]);

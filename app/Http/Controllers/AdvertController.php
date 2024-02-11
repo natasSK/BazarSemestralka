@@ -67,7 +67,8 @@ class AdvertController extends Controller
         $user = User::findOrFail($advert->user_id);
         $adverts = $user->adverts;
 
-        return view('profile')->with(['adverts' => $adverts, 'user' => User::findOrFail($advert->user_id)]);
+        $adverts = Advert::latest()->take(6)->get();
+        return view('home', compact('adverts'));
     }
 
     public function search(Request $request)

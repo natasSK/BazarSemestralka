@@ -8,7 +8,6 @@
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-body">
-
                             <div class="mb-3">
                                 <label for="cenaOd" class="form-label">Cena od</label>
                                 <input type="text" class="form-control" id="cenaOd" name="cenaOd" placeholder="Zadajte minimálnu cenu">
@@ -159,38 +158,34 @@
                                     <div class="col-md-4 col-lg-3 col-sm-6 col-6">
                                         <div class="tile">
                                             <div class="tileUp" style="background-image: url('{{ $ad->photo ? asset('storage/' . $ad->photo) : asset('https://www.pacificfoodmachinery.com.au/media/catalog/product/placeholder/default/no-product-image-400x400.png') }}');">
-                                                @auth
-                                                <a href="#" class="toggle-favorite" style="text-align: right; display: block"
+                                                <a href="#" class="toggle-favorite"
                                                    data-advert-id="{{ $ad->id }}"
                                                    data-csrf-token="{{ csrf_token() }}"
                                                    data-is-favorite="{{ FavoriteProduct::isFavorite(auth()->id(), $ad->id) ? 'true' : 'false' }}">
                                                     @if (FavoriteProduct::isFavorite(auth()->id(), $ad->id))
-                                                        <ion-icon style="color: red; font-size: 32px"
-                                                                  name="heart-dislike-circle-outline"></ion-icon>
+                                                        <ion-icon name="heart-dislike-circle-outline"></ion-icon>
                                                     @else
-                                                        <ion-icon style="color: red; font-size: 32px"
-                                                                  name="heart-circle-outline"></ion-icon>
+                                                        <ion-icon name="heart-circle-outline"></ion-icon>
                                                     @endif
                                                 </a>
-                                                @endauth
                                             </div>
-                                                <div class="tileDown">
-                                                    <div class="text-wrap">
-                                                        <a href="/adverts/{{ $ad->id }}" style="text-decoration: none; color: black">
-                                                            <h5>{{ $ad->title }}</h5>
-                                                        </a>
-                                                    </div>
-                                                    <div class="text-start text-wrap" style="font-size: smaller">
-                                                        <p class="mb-3">{{ $ad->short_desc }}</p>
-                                                    </div>
-                                                    <div class="text-start" style="color:dodgerblue">
-                                                        <p class="mb-0">{{ $ad->place }}</p>
-                                                    </div>
-                                                    <div class="text-start" style="color:mediumseagreen">
-                                                        <p class="mb-0">{{ $ad->price }}€</p>
-                                                    </div>
+                                            <div class="tileDown">
+                                                <div class="text-wrap">
+                                                    <a class="adTitle" href="/adverts/{{ $ad->id }}">
+                                                        <h5>{{ $ad->title }}</h5>
+                                                    </a>
+                                                </div>
+                                                <div class="text-start text-wrap adShTitle">
+                                                    <p class="mb-3">{{ $ad->short_desc }}</p>
+                                                </div>
+                                                <div class="text-start adPlace">
+                                                    <p class="mb-0">{{ $ad->place }}</p>
+                                                </div>
+                                                <div class="text-start adPrice">
+                                                    <p class="mb-0">{{ $ad->price }}€</p>
                                                 </div>
                                             </div>
+                                        </div>
                                     </div>
                                 @endforeach
                             </div>
@@ -198,10 +193,7 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
     </form>
-
-
 @endsection

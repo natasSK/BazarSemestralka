@@ -13,7 +13,7 @@
                 <label for="image" class="col-md-4 col-form-label text-md-end col-lg-3">{{ __('Fotka') }}</label>
                 <div class="col-md-6">
                     @if($user->photo)
-                        <img src="{{ asset('storage/' . $user->photo) }}" alt="Current Photo" class="img-thumbnail mb-3" style="max-height: 150px">
+                        <img src="{{ asset('storage/' . $user->photo) }}" alt="Current Photo" class="img-thumbnail mb-3 editPhoto">
                     @endif
                     <input id="image" type="file" class="form-control-file @error('photo') is-invalid @enderror" name="photo">
                     <div class="form-check my-3">

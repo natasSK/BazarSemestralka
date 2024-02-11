@@ -4,11 +4,11 @@
 @section('content')
     <div class="container mt-2">
         <div class="row mb-2">
-            <div class="col-md-4" id="user-profile" style="height: 30%">
+            <div class="col-md-4" id="user-profile">
                 @if ($user->photo)
-                    <img src="{{ asset('storage/' . $user->photo) }}" alt="Užívateľská fotka" class="img-fluid mb-3 rounded-2" style="height: 300px; width: 300px">
+                    <img src="{{ asset('storage/' . $user->photo) }}" alt="Užívateľská fotka" class="img-fluid mb-3 rounded-2 userPhoto">
                 @else
-                    <img src="https://holmesbuilders.com/wp-content/uploads/2016/12/male-profile-image-placeholder.png" alt="Užívateľská fotka" class="img-fluid mb-3 rounded-2" style="height: 300px; width: 300px">
+                    <img src="https://holmesbuilders.com/wp-content/uploads/2016/12/male-profile-image-placeholder.png" alt="Užívateľská fotka" class="img-fluid mb-3 rounded-2 userPhoto">
                 @endif
                 <h4>{{ $user->username }}</h4>
                 @if ($user->name)
@@ -23,7 +23,7 @@
                     <p>Adresa: {{ $user->district }}</p>
                 @endif
 
-                <div class="rating" style="font-size: 32px; color: orange"
+                <div class="rating"
                      data-user-id="{{ auth()->id() }}"
                      data-csrf-token="{{ csrf_token() }}">
                     <span data-rating="1"><ion-icon name="star-outline"></ion-icon></span>
@@ -40,41 +40,36 @@
                     <div class="row">
                         @foreach ($adverts as $ad)
                             <div class="col-md-6 col-lg-4">
-                                    <div class="tile">
-                                        <div class="tileUp" style="background-image: url('{{ $ad->photo ? asset('storage/' . $ad->photo) : asset('https://www.pacificfoodmachinery.com.au/media/catalog/product/placeholder/default/no-product-image-400x400.png') }}');">
-                                            @auth
-                                            <a href="#" class="toggle-favorite" style="text-align: right; display: block"
-                                               data-advert-id="{{ $ad->id }}"
-                                               data-csrf-token="{{ csrf_token() }}"
-                                               data-is-favorite="{{ FavoriteProduct::isFavorite(auth()->id(), $ad->id) ? 'true' : 'false' }}">
-
-                                                @if (FavoriteProduct::isFavorite(auth()->id(), $ad->id))
-                                                    <ion-icon style="color: red; font-size: 32px"
-                                                              name="heart-dislike-circle-outline"></ion-icon>
-                                                @else
-                                                    <ion-icon style="color: red; font-size: 32px"
-                                                              name="heart-circle-outline"></ion-icon>
-                                                @endif
+                                <div class="tile">
+                                    <div class="tileUp" style="background-image: url('{{ $ad->photo ? asset('storage/' . $ad->photo) : asset('https://www.pacificfoodmachinery.com.au/media/catalog/product/placeholder/default/no-product-image-400x400.png') }}');">
+                                        <a href="#" class="toggle-favorite"
+                                           data-advert-id="{{ $ad->id }}"
+                                           data-csrf-token="{{ csrf_token() }}"
+                                           data-is-favorite="{{ FavoriteProduct::isFavorite(auth()->id(), $ad->id) ? 'true' : 'false' }}">
+                                            @if (FavoriteProduct::isFavorite(auth()->id(), $ad->id))
+                                                <ion-icon name="heart-dislike-circle-outline"></ion-icon>
+                                            @else
+                                                <ion-icon name="heart-circle-outline"></ion-icon>
+                                            @endif
+                                        </a>
+                                    </div>
+                                    <div class="tileDown">
+                                        <div class="text-wrap">
+                                            <a class="adTitle" href="/adverts/{{ $ad->id }}">
+                                                <h5>{{ $ad->title }}</h5>
                                             </a>
-                                            @endauth
                                         </div>
-                                        <div class="tileDown">
-                                            <div class="text-wrap">
-                                                <a href="/adverts/{{ $ad->id }}" style="text-decoration: none; color: black">
-                                                    <h5>{{ $ad->title }}</h5>
-                                                </a>
-                                            </div>
-                                            <div class="text-start text-wrap" style="font-size: smaller">
-                                                <p class="mb-3">{{ $ad->short_desc }}</p>
-                                            </div>
-                                            <div class="text-start" style="color:dodgerblue">
-                                                <p class="mb-0">{{ $ad->place }}</p>
-                                            </div>
-                                            <div class="text-start" style="color:mediumseagreen">
-                                                <p class="mb-0">{{ $ad->price }}€</p>
-                                            </div>
+                                        <div class="text-start text-wrap adShTitle">
+                                            <p class="mb-3">{{ $ad->short_desc }}</p>
+                                        </div>
+                                        <div class="text-start adPlace">
+                                            <p class="mb-0">{{ $ad->place }}</p>
+                                        </div>
+                                        <div class="text-start adPrice">
+                                            <p class="mb-0">{{ $ad->price }}€</p>
                                         </div>
                                     </div>
+                                </div>
                             </div>
                         @endforeach
                     </div>
@@ -99,8 +94,6 @@
                 <button type="submit" class="btn btn-primary">Uverejni</button>
             </form>
             @endauth
-
-            <!-- Zobrazenie komentárov -->
             @forelse($user->comments as $comment)
                 <div class="comment card mt-3">
                     <div class="card-body">

@@ -28,9 +28,9 @@
 }
 
 .hlObrDiv {
-    width: 90%;
-    height: 170px;
     margin: 0 auto;
+    height: 80%;
+    position: relative;
 }
 .hlObrImg {
     max-width: 100%;
@@ -42,6 +42,7 @@
     background-image: url("/resources/img/pozadie.png");
     background-size: cover;
     background-position: center;
+    height: 300px;
 }
 
 .vyhladavanie {
@@ -56,6 +57,15 @@
     font-weight: bold;
     font-size: 25px;
     color: #3498db;
+}
+
+.search {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    border-radius: 5px;
 }
 
 .search button {
@@ -98,6 +108,11 @@
 .najnovsieText ion-icon {
     color: red;
 }
+.najnovsieText {
+    height: 10%;
+    font-weight: bold;
+    font-size: larger;
+}
 
 
 .card {
@@ -114,6 +129,16 @@
     text-decoration: none;
     font-weight: bold;
     font-size: large;
+}
+
+.kategorie {
+    height: 400px;
+}
+.kategorie .row {
+    height: 20%;
+}
+.kategorie .col {
+    max-height: 100%;
 }
 
 .searchbar{
@@ -274,6 +299,7 @@
 #user-profile {
     padding: 20px;
     margin-bottom: 20px;
+    height: 30%;
 }
 .ad-tile {
     border: 1px solid #ddd;
@@ -283,11 +309,79 @@
 .advertRow {
     height: 400px;
 }
+.adMainImage {
+    width: 400px;
+    height: 400px;
+}
+.adToFavoritesLink {
+    right: 0;
+}
 
-
-
-
-
-
-
+.adToFavoritesLink ion-icon {
+    color: red;
+    font-size: 32px;
+}
+.adTitle {
+    height: 15%;
+}
+.linkProfile {
+    text-decoration: none;
+    color: black;
+}
+.linkProfile .firstHalf {
+    width: 120px;
+}
+.linkProfile .secondHalf {
+    width: 50%;
+    margin-top: 25px;
+}
+.linkProfile img {
+    height: 100px;
+    width: 120px;
+}
+.adDescription {
+    height: 28%;
+    padding: 10px;
+    border: 1px solid;
+}
+.editPhoto {
+    max-height: 150px;
+}
+.toggle-favorite {
+    text-align: right;
+    display: block;
+}
+.toggle-favorite ion-icon {
+    color: red;
+    font-size: 32px;
+}
+.adTitle {
+    text-decoration: none;
+    color: black;
+}
+.adPlaceMain {
+    color: dodgerblue;
+    font-size: large;
+}
+.adPriceMain {
+    color:mediumseagreen;
+    font-size: large;
+}
+.adShTitle {
+    font-size: smaller;
+}
+.adPlace {
+    color:dodgerblue;
+}
+.adPrice {
+    color: mediumseagreen;
+}
+.userPhoto {
+    height: 300px;
+    width: 300px;
+}
+.rating {
+    font-size: 32px;
+    color: orange;
+}
 
