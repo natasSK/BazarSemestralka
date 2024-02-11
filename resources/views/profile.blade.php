@@ -46,7 +46,7 @@
                         @foreach ($adverts as $ad)
                             <div class="col-md-6 col-lg-4">
                                     <div class="tile">
-                                        <div class="tileUp" style="background-image: url('{{ asset('https://www.pacificfoodmachinery.com.au/media/catalog/product/placeholder/default/no-product-image-400x400.png') }}');">
+                                        <div class="tileUp" style="background-image: url('{{ $ad->photo ? asset('storage/' . $ad->photo) : asset('https://www.pacificfoodmachinery.com.au/media/catalog/product/placeholder/default/no-product-image-400x400.png') }}');">
                                             <a href="#" class="toggle-favorite" style="text-align: right; display: block"
                                                data-advert-id="{{ $ad->id }}"
                                                data-csrf-token="{{ csrf_token() }}"
@@ -116,7 +116,11 @@
                         <p class="card-subtitle text-muted">Uverejnené: {{ $comment->published_at }}</p>
                         <div class="d-flex align-items-center">
                             <a href="{{ url('/profile/' . $comment->author->id) }}">
-                                <img src="https://holmesbuilders.com/wp-content/uploads/2016/12/male-profile-image-placeholder.png" alt="Author's Photo" class="rounded-circle me-2" width="40" height="40">
+                                @if ($user->photo)
+                                    <img src="{{ asset('storage/' . $user->photo) }}" alt="Author's Photo" class="rounded-circle me-2" width="40" height="40">
+                                @else
+                                    <img src="https://holmesbuilders.com/wp-content/uploads/2016/12/male-profile-image-placeholder.png" alt="Author's Photo" class="rounded-circle me-2" width="40" height="40">
+                                @endif
                             </a>
                             <p class="card-text">
                                 <a href="{{ url('/profile/' . $comment->author->id) }}" class="text-decoration-none text-dark">

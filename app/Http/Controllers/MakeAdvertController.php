@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Advert;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MakeAdvertController extends Controller
 {
@@ -17,10 +18,12 @@ class MakeAdvertController extends Controller
         return view('create');
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        $data = \request()->validate([
-            'image' => ['image'],
+        $user = auth()->user();
+
+        $data = $request->validate([
+            'photo' => ['image'],
             'title' => ['required', 'string', 'max:255'],
             'place' => ['required'],
             'price' => ['required', 'integer'],
@@ -30,8 +33,15 @@ class MakeAdvertController extends Controller
             'description' => ['required', 'string', 'max:2000'],
         ]);
 
-        // \App\Models\Advert::create($data); //TODO Dodať fotku a dlhy popis
-        auth()->user()->adverts()->create([
+        // Spracovanie fotky, ak bola poslaná
+        $photoPath = null;
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+            $photoPath = $photo->store('advert_photos', 'public'); // Uloženie súboru a získanie cesty
+        }
+
+        // Vytvorenie inzerátu s informáciami a priradenie fotky
+        $advert = $user->adverts()->create([
             'title' => $data['title'],
             'place' => $data['place'],
             'price' => $data['price'],
@@ -39,10 +49,11 @@ class MakeAdvertController extends Controller
             'category' => $data['category'],
             'type' => $data['type'],
             'description' => $data['description'],
+            'photo' => $photoPath, // Priradenie cesty k fotke
         ]);
 
-        $user = auth()->user();
         $adverts = auth()->user()->adverts;
         return view('profile')->with(['user' => $user, 'adverts' => $adverts]);
     }
+
 }

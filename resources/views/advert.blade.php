@@ -8,7 +8,11 @@
                 <div class="container">
                     <div class="d-flex">
                         <div class="position-relative">
-                            <img class="image-fluid" src="https://www.pacificfoodmachinery.com.au/media/catalog/product/placeholder/default/no-product-image-400x400.png" alt="Second slide" style="width: 400px; height: 400px">
+                            @if ($advert->photo)
+                                <img src="{{ asset('storage/' . $advert->photo) }}" alt="Second slide" style="width: 400px; height: 400px">
+                            @else
+                                <img class="image-fluid" src="https://www.pacificfoodmachinery.com.au/media/catalog/product/placeholder/default/no-product-image-400x400.png" alt="Second slide" style="width: 400px; height: 400px">
+                            @endif
                             <a href="#" class="toggle-favorite position-absolute top-0" style="right: 0;"
                                data-advert-id="{{ $advert->id }}"
                                data-csrf-token="{{ csrf_token() }}"

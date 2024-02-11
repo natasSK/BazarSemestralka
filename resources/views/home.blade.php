@@ -180,7 +180,7 @@
             @foreach ($adverts as $ad)
                 <div class="col-md-3 col-lg-2 col-sm-4 col-4">
                     <div class="tile">
-                        <div class="tileUp" style="background-image: url('{{ asset('https://www.pacificfoodmachinery.com.au/media/catalog/product/placeholder/default/no-product-image-400x400.png') }}');">
+                        <div class="tileUp" style="background-image: url('{{ $ad->photo ? asset('storage/' . $ad->photo) : asset('https://www.pacificfoodmachinery.com.au/media/catalog/product/placeholder/default/no-product-image-400x400.png') }}');">
                             <a href="#" class="toggle-favorite" style="text-align: right; display: block"
                                data-advert-id="{{ $ad->id }}"
                                data-csrf-token="{{ csrf_token() }}"

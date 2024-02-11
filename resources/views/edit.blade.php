@@ -10,11 +10,17 @@
             @method('PATCH')
 
             <div class="row my-3">
-                <label for="image" class="col-md-4 col-form-label text-md-end col-lg-4 col-xl-3 col-xxl-3">{{ __('Fotka') }}</label>
+                <label for="photo" class="col-md-4 col-form-label text-md-end col-lg-4 col-xl-3 col-xxl-3">{{ __('Fotka') }}</label>
                 <div class="col-md-6">
-                    <input id="image" type="file" class="form-control-file @error('image') is-invalid @enderror" name="image" value="{{ old('image')}}">
-
-                    @error('image')
+                    <input id="photo" type="file" class="form-control-file @error('photo') is-invalid @enderror" name="photo" value="{{ old('photo')}}">
+                    <!-- Tlačidlo na vymazanie fotky -->
+                    <div class="form-check my-3">
+                        <input class="form-check-input" type="checkbox" id="delete_photo" name="delete_photo" value="1">
+                        <label class="form-check-label" for="delete_photo">
+                            Vymazať fotku
+                        </label>
+                    </div>
+                    @error('photo')
                     <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>

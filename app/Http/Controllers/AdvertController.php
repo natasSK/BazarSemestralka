@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Advert;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AdvertController extends Controller
 {
@@ -30,8 +31,9 @@ class AdvertController extends Controller
     public function update(Advert $advert)
     {
         $this->authorize('update', $advert);
-        $data = \request()->validate([
-            'image' => ['image'],
+
+        $data = request()->validate([
+            'photo' => ['image'],
             'title' => ['required', 'string', 'max:255'],
             'place' => ['required'],
             'price' => ['required', 'integer'],
@@ -43,8 +45,21 @@ class AdvertController extends Controller
 
         $advert->update($data);
 
+        // Spracovanie fotky, ak bola poslaná
+        if (request()->hasFile('photo')) {
+            $photo = request()->file('photo');
+            $photoPath = $photo->store('advert_photos', 'public'); // Uloženie súboru a získanie cesty
+            $advert->photo = $photoPath;
+        }
+
+        // Vymazanie fotky, ak je požadované
+        $advert->photo = (request()->has('delete_photo') && request()->input('delete_photo') == 1) ? null : $advert->photo;
+
+        $advert->save();
+
         return view('advert')->with(['advert' => $advert, 'user' => User::findOrFail($advert->user_id)]);
     }
+
 
     public function delete(Advert $advert)
     {

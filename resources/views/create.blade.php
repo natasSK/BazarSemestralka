@@ -8,11 +8,11 @@
         <form action="/a" enctype="multipart/form-data" method="post">
             @csrf
             <div class="row my-3">
-                <label for="image" class="col-md-4 col-form-label text-md-end col-lg-4 col-xl-3 col-xxl-3">{{ __('Fotka') }}</label>
+                <label for="photo" class="col-md-4 col-form-label text-md-end col-lg-4 col-xl-3 col-xxl-3">{{ __('Fotka') }}</label>
                 <div class="col-md-6">
-                    <input id="image" type="file" class="form-control-file @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}">
+                    <input id="photo" type="file" class="form-control-file @error('photo') is-invalid @enderror" name="photo" value="{{ old('photo') }}">
 
-                    @error('image')
+                    @error('photo')
                     <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>

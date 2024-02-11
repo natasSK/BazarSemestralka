@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('price');
             $table->string('type');
             $table->string('category');
+            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }
