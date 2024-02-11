@@ -4,7 +4,6 @@
 @section('content')
     <div class="container mt-2">
         <div class="row mb-2">
-            <!-- Ľavý panel s profilom užívateľa -->
             <div class="col-md-4" id="user-profile" style="height: 30%">
                 @if ($user->photo)
                     <img src="{{ asset('storage/' . $user->photo) }}" alt="Užívateľská fotka" class="img-fluid mb-3 rounded-2" style="height: 300px; width: 300px">
@@ -36,7 +35,6 @@
                 <p class="GlobalAverageRating">Priemerné hodnotenie: <span id="average-rating">{{ $globalAverageRating }}</span></p>
 
             </div>
-            <!-- Pravý panel s inzerátmi (tiles) -->
             <div class="col-md-8 mt-5 col-sm-5 col-5">
                 <div class="container najnovsie">
                     <div class="row">
@@ -83,7 +81,6 @@
                 </div>
             </div>
             @auth
-            <!-- Formulár na pridanie/upravenie komentára -->
             <form action="{{ route('comment.store', ['id' => $user->id]) }}" method="POST" class="mt-4">
                 @csrf
                 <div class="mb-3">
@@ -91,7 +88,6 @@
                     <textarea class="form-control" name="comment" id="comment" cols="30" rows="5"></textarea>
                 </div>
 
-                <!-- Dropdown pre odporúčanie -->
                 <div class="mb-3">
                     <label for="recommendation" class="form-label">Hodnotenie:</label>
                     <select class="form-select" name="recommendation" id="recommendation">
@@ -131,17 +127,15 @@
                             </p>
 
                         </div>
-                        @if(auth()->user() && auth()->user()->id === $comment->author->id)
+                        @can('delete', $comment)
                             <form action="{{ route('comment.destroy', ['id' => $comment->id]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger ms-auto mt-2">Vymaž</button>
                             </form>
-                        @endif
+                        @endcan
                     </div>
                 </div>
-
-
             @empty
                 <p class="mt-3 mb-2">Zatiaľ žiadne komentáre</p>
             @endforelse

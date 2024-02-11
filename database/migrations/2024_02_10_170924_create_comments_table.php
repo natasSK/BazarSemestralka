@@ -13,14 +13,13 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users'); // Väzba na užívateľa, ku ktorému patrí komentár
-            $table->foreignId('author_id')->constrained('users'); // Väzba na užívateľa, ktorý vytvoril komentár
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('author_id')->constrained('users');
             $table->text('text');
             $table->timestamp('published_at')->default(now());
             $table->integer('recommendation')->default(0);
             $table->timestamps();
         });
-
     }
 
     /**

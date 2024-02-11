@@ -35,17 +35,17 @@ class AdvertPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Advert $advert): bool
+    public function update(User $user, Advert $advert)
     {
-        return $user->id == $advert->user_id;
+        return $user->role === 'admin' || $user->id === $advert->user_id;
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Advert $advert): bool
+    public function delete(User $user, Advert $advert)
     {
-        return $user->id == $advert->user_id;
+        return $user->id === $advert->user_id || $user->role === 'admin';
     }
 
     /**

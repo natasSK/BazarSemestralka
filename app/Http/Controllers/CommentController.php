@@ -58,10 +58,7 @@ class CommentController extends Controller
     public function destroy($id)
     {
         $comment = Comment::findOrFail($id);
-
-        if (auth()->user()->id !== $comment->author_id) {
-            abort(403, 'Nemáte oprávnenie odstrániť tento komentár.');
-        }
+        $this->authorize('delete', $comment);
 
         $comment->delete();
 

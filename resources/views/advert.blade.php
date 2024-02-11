@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="container mt-3 col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
-        <div class="row" style="height: 400px;">
+        <div class="row advertRow">
             <div class="col-lg-5">
                 <div class="container">
                     <div class="d-flex">
@@ -27,7 +27,6 @@
                                 @endif
                             </a>
                                 @endauth
-
                             @can('update', $advert)
                                 <div class="position-absolute top-0 start-0">
                                     <a href="/adverts/{{ $advert->id }}/edit" class="btn btn-warning btn-lg mt-1 mx-1">Uprav</a>
@@ -41,14 +40,11 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
             <div class="col-lg textInfo mx-3">
                 <div class="row my-2 mx-1 text-truncate fw-bold fs-1" style="height: 15%">
                     <p>{{ $advert->title }}</p>
                 </div>
-
                 <div class="row">
                     <div class="col-7 py-1">
                         <a href="{{ route('profile.show', ['user' => $advert->user_id]) }}" style="text-decoration: none; color: black">
@@ -76,25 +72,16 @@
                             <p class="my-1" style="font-size: larger">{{ $advert->price }}€</p>
                         </div>
                     </div>
-
                 </div>
                 <div class="row my-2 mx-1">
                     Stav: {{ $advert->type }}, Kategória: {{ $advert->category }}, z dňa {{ $advert->created_at }} (č. {{ $advert->id }})
                 </div>
-
                 <div class="row my-2 mx-1 overflow-scroll overflow-x-hidden overflow-y-auto border-light-subtle" style="height: 28%; padding: 10px; border: 1px solid">
                     {{ $advert->description }}
                 </div>
-
-
             </div>
-
-
         </div>
-
     </div>
-
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
 @endsection
