@@ -77,3 +77,9 @@ Route::post('/user/{id}/comment', [CommentController::class, 'store'])->name('co
 Route::patch('/comment/{id}', [CommentController::class, 'update'])->name('comment.update');
 Route::delete('/comment/{id}', [CommentController::class, 'destroy'])->name('comment.destroy');
 
+
+//Route::patch('/profile/{id}/edit', [App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.update');
+//Route::get('/profile/{id}/editProfile', [App\Http\Controllers\ProfileController::class, 'editProfile'])->name('profile.edit');
+
+Route::get('/profile/{id}/edit', [App\Http\Controllers\ProfileController::class, 'editProfile'])->name('edit-profile');
+Route::patch('/profile/{id}/edit', [App\Http\Controllers\ProfileController::class, 'updateProfile'])->name('update-profile');

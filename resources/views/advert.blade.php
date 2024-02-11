@@ -48,7 +48,12 @@
                         <a href="{{ route('profile.show', ['user' => $advert->user_id]) }}" style="text-decoration: none; color: black">
                             <div class="row mx-2">
                                 <div class="d-inline" style="width: 120px">
-                                    <img src="https://holmesbuilders.com/wp-content/uploads/2016/12/male-profile-image-placeholder.png" class="img-fluid rounded-5" alt="Profilový obrázok" style="height: 100px; width: 120px">
+                                    @if ($user->photo)
+                                        <img src="{{ asset('storage/' . $user->photo) }}" alt="Užívateľská fotka" class="img-fluid rounded-5"
+                                             style="height: 100px; width: 120px">
+                                    @else
+                                        <img src="https://holmesbuilders.com/wp-content/uploads/2016/12/male-profile-image-placeholder.png" class="img-fluid rounded-5" alt="Profilový obrázok" style="height: 100px; width: 120px">
+                                    @endif
                                 </div>
                                 <div class="d-inline" style="width: 50%; margin-top: 25px;">
                                     <h5>{{ $user->username }}</h5>

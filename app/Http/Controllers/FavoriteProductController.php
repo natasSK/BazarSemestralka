@@ -11,21 +11,6 @@ use Illuminate\Support\Facades\Redirect;
 
 class FavoriteProductController extends Controller
 {
-    /*
-    public function addToFavorites($advertId)
-    {
-        $user = auth()->user();
-
-        if (!$user->favoriteProducts()->where('advert_id', $advertId)->exists()) {
-            $user->favoriteProducts()->create([
-                'user_id' => $user->id,
-                'advert_id' => $advertId,
-            ]);
-        }
-
-        return redirect()->back()->with('success', 'Produkt bol pridaný do obľúbených.');
-    }
-    */
 
     public function showFavorites()
     {
@@ -43,23 +28,6 @@ class FavoriteProductController extends Controller
             'favoriteProducts' => $favoriteProducts,
         ]);
     }
-    /*
-    public function deleteFavorite($id)
-    {
-        $advert = Advert::findOrFail($id);
-        $user = auth()->user();
-
-        $favoriteProduct = FavoriteProduct::where('user_id', $user->id)
-            ->where('advert_id', $advert->id)
-            ->first();
-
-        if ($favoriteProduct) {
-            $favoriteProduct->delete();
-        }
-
-        return redirect()->back();
-    }
-    */
 
     public function addToFavorites($advertId)
     {

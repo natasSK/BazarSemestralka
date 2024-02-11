@@ -6,9 +6,24 @@
         <div class="row mb-2">
             <!-- Ľavý panel s profilom užívateľa -->
             <div class="col-md-4" id="user-profile" style="height: 30%">
-                <img src="https://holmesbuilders.com/wp-content/uploads/2016/12/male-profile-image-placeholder.png"
-                     alt="Užívateľská fotka" class="img-fluid mb-3 rounded-2" style="height: 300px; width: 300px">
+                @if ($user->photo)
+                    <img src="{{ asset('storage/' . $user->photo) }}" alt="Užívateľská fotka" class="img-fluid mb-3 rounded-2" style="height: 300px; width: 300px">
+                @else
+                    <img src="https://holmesbuilders.com/wp-content/uploads/2016/12/male-profile-image-placeholder.png" alt="Užívateľská fotka" class="img-fluid mb-3 rounded-2" style="height: 300px; width: 300px">
+                @endif
                 <h4>{{ $user->username }}</h4>
+                @if ($user->name)
+                    <p>Meno: {{ $user->name }}</p>
+                @endif
+                <p>Email: {{ $user->email }}</p>
+                @if ($user->phone_number)
+                    <p>Tel. č: {{ $user->phone_number }}</p>
+                @endif
+
+                @if ($user->district)
+                    <p>Adresa: {{ $user->district }}</p>
+                @endif
+
                 <div class="rating" style="font-size: 32px; color: orange"
                      data-user-id="{{ auth()->id() }}"
                      data-csrf-token="{{ csrf_token() }}">
@@ -19,7 +34,6 @@
                     <span data-rating="5"><ion-icon name="star-outline"></ion-icon></span>
                 </div>
                 <p class="GlobalAverageRating">Priemerné hodnotenie: <span id="average-rating">{{ $globalAverageRating }}</span></p>
-                <p>Email: {{ $user->email }}</p>
                 @can('create', $user)
                     <a href="/a/create" class="btn btn-info btn-lg btn-block">Pridaj</a>
                 @endcan

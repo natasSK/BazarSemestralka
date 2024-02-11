@@ -60,14 +60,7 @@ class AdvertController extends Controller
 
         //return view('profile')->with(['adverts' => $advert, 'user' => User::findOrFail($advert->user_id)]);
     }
-/*
-    public function search(Request $request)
-    {
-        $string = $request->query('string', ''); // Retrieve the 'string' parameter from the query, default to an empty string if not present
-        $adverts = Advert::where('title', 'like', '%' . $string . '%')->get();
-        return view('search', compact('adverts'));
-    }
-*/
+
     public function search(Request $request)
     {
         $title = $request->input('string');
